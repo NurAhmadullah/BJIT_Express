@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */; };
+		89101CD22A04C1E70064C993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CD12A04C1E70064C993 /* ContentView.swift */; };
+		89101CD42A04C1E80064C993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89101CD32A04C1E80064C993 /* Assets.xcassets */; };
+		89101CD72A04C1E80064C993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89101CD62A04C1E80064C993 /* Preview Assets.xcassets */; };
+		89101CD92A04C1E80064C993 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CD82A04C1E80064C993 /* Persistence.swift */; };
+		89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89101CDA2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld */; };
+		89101CE72A04C1E80064C993 /* BJIT_Express_MacPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CE62A04C1E80064C993 /* BJIT_Express_MacPairTests.swift */; };
+		89101CF12A04C1E80064C993 /* BJIT_Express_MacPairUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CF02A04C1E80064C993 /* BJIT_Express_MacPairUITests.swift */; };
+		89101CF32A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CF22A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89101CE32A04C1E80064C993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89101CC42A04C1E70064C993 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89101CCB2A04C1E70064C993;
+			remoteInfo = "BJIT Express MacPair";
+		};
+		89101CED2A04C1E80064C993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89101CC42A04C1E70064C993 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89101CCB2A04C1E70064C993;
+			remoteInfo = "BJIT Express MacPair";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BJIT Express MacPair.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairApp.swift; sourceTree = "<group>"; };
+		89101CD12A04C1E70064C993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		89101CD32A04C1E80064C993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89101CD62A04C1E80064C993 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		89101CD82A04C1E80064C993 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		89101CDB2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BJIT_Express_MacPair.xcdatamodel; sourceTree = "<group>"; };
+		89101CDD2A04C1E80064C993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89101CE22A04C1E80064C993 /* BJIT Express MacPairTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BJIT Express MacPairTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89101CE62A04C1E80064C993 /* BJIT_Express_MacPairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairTests.swift; sourceTree = "<group>"; };
+		89101CEC2A04C1E80064C993 /* BJIT Express MacPairUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BJIT Express MacPairUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89101CF02A04C1E80064C993 /* BJIT_Express_MacPairUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairUITests.swift; sourceTree = "<group>"; };
+		89101CF22A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		89101CC92A04C1E70064C993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CDF2A04C1E80064C993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CE92A04C1E80064C993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		89101CC32A04C1E70064C993 = {
+			isa = PBXGroup;
+			children = (
+				89101CCE2A04C1E70064C993 /* BJIT Express MacPair */,
+				89101CE52A04C1E80064C993 /* BJIT Express MacPairTests */,
+				89101CEF2A04C1E80064C993 /* BJIT Express MacPairUITests */,
+				89101CCD2A04C1E70064C993 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		89101CCD2A04C1E70064C993 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */,
+				89101CE22A04C1E80064C993 /* BJIT Express MacPairTests.xctest */,
+				89101CEC2A04C1E80064C993 /* BJIT Express MacPairUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89101CCE2A04C1E70064C993 /* BJIT Express MacPair */ = {
+			isa = PBXGroup;
+			children = (
+				89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */,
+				89101CD12A04C1E70064C993 /* ContentView.swift */,
+				89101CD32A04C1E80064C993 /* Assets.xcassets */,
+				89101CD82A04C1E80064C993 /* Persistence.swift */,
+				89101CDD2A04C1E80064C993 /* Info.plist */,
+				89101CDA2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld */,
+				89101CD52A04C1E80064C993 /* Preview Content */,
+			);
+			path = "BJIT Express MacPair";
+			sourceTree = "<group>";
+		};
+		89101CD52A04C1E80064C993 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				89101CD62A04C1E80064C993 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		89101CE52A04C1E80064C993 /* BJIT Express MacPairTests */ = {
+			isa = PBXGroup;
+			children = (
+				89101CE62A04C1E80064C993 /* BJIT_Express_MacPairTests.swift */,
+			);
+			path = "BJIT Express MacPairTests";
+			sourceTree = "<group>";
+		};
+		89101CEF2A04C1E80064C993 /* BJIT Express MacPairUITests */ = {
+			isa = PBXGroup;
+			children = (
+				89101CF02A04C1E80064C993 /* BJIT_Express_MacPairUITests.swift */,
+				89101CF22A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift */,
+			);
+			path = "BJIT Express MacPairUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		89101CCB2A04C1E70064C993 /* BJIT Express MacPair */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89101CF62A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPair" */;
+			buildPhases = (
+				89101CC82A04C1E70064C993 /* Sources */,
+				89101CC92A04C1E70064C993 /* Frameworks */,
+				89101CCA2A04C1E70064C993 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BJIT Express MacPair";
+			productName = "BJIT Express MacPair";
+			productReference = 89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */;
+			productType = "com.apple.product-type.application";
+		};
+		89101CE12A04C1E80064C993 /* BJIT Express MacPairTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89101CF92A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPairTests" */;
+			buildPhases = (
+				89101CDE2A04C1E80064C993 /* Sources */,
+				89101CDF2A04C1E80064C993 /* Frameworks */,
+				89101CE02A04C1E80064C993 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89101CE42A04C1E80064C993 /* PBXTargetDependency */,
+			);
+			name = "BJIT Express MacPairTests";
+			productName = "BJIT Express MacPairTests";
+			productReference = 89101CE22A04C1E80064C993 /* BJIT Express MacPairTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		89101CEB2A04C1E80064C993 /* BJIT Express MacPairUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89101CFC2A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPairUITests" */;
+			buildPhases = (
+				89101CE82A04C1E80064C993 /* Sources */,
+				89101CE92A04C1E80064C993 /* Frameworks */,
+				89101CEA2A04C1E80064C993 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89101CEE2A04C1E80064C993 /* PBXTargetDependency */,
+			);
+			name = "BJIT Express MacPairUITests";
+			productName = "BJIT Express MacPairUITests";
+			productReference = 89101CEC2A04C1E80064C993 /* BJIT Express MacPairUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		89101CC42A04C1E70064C993 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					89101CCB2A04C1E70064C993 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					89101CE12A04C1E80064C993 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 89101CCB2A04C1E70064C993;
+					};
+					89101CEB2A04C1E80064C993 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 89101CCB2A04C1E70064C993;
+					};
+				};
+			};
+			buildConfigurationList = 89101CC72A04C1E70064C993 /* Build configuration list for PBXProject "BJIT Express MacPair" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 89101CC32A04C1E70064C993;
+			productRefGroup = 89101CCD2A04C1E70064C993 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				89101CCB2A04C1E70064C993 /* BJIT Express MacPair */,
+				89101CE12A04C1E80064C993 /* BJIT Express MacPairTests */,
+				89101CEB2A04C1E80064C993 /* BJIT Express MacPairUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		89101CCA2A04C1E70064C993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89101CD72A04C1E80064C993 /* Preview Assets.xcassets in Resources */,
+				89101CD42A04C1E80064C993 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CE02A04C1E80064C993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CEA2A04C1E80064C993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		89101CC82A04C1E70064C993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89101CD92A04C1E80064C993 /* Persistence.swift in Sources */,
+				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
+				89101CD22A04C1E70064C993 /* ContentView.swift in Sources */,
+				89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CDE2A04C1E80064C993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89101CE72A04C1E80064C993 /* BJIT_Express_MacPairTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89101CE82A04C1E80064C993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89101CF32A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift in Sources */,
+				89101CF12A04C1E80064C993 /* BJIT_Express_MacPairUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89101CE42A04C1E80064C993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89101CCB2A04C1E70064C993 /* BJIT Express MacPair */;
+			targetProxy = 89101CE32A04C1E80064C993 /* PBXContainerItemProxy */;
+		};
+		89101CEE2A04C1E80064C993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89101CCB2A04C1E70064C993 /* BJIT Express MacPair */;
+			targetProxy = 89101CED2A04C1E80064C993 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		89101CF42A04C1E80064C993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		89101CF52A04C1E80064C993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		89101CF72A04C1E80064C993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BJIT Express MacPair/Preview Content\"";
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPair";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		89101CF82A04C1E80064C993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BJIT Express MacPair/Preview Content\"";
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPair";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		89101CFA2A04C1E80064C993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPairTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BJIT Express MacPair.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BJIT Express MacPair";
+			};
+			name = Debug;
+		};
+		89101CFB2A04C1E80064C993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPairTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BJIT Express MacPair.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BJIT Express MacPair";
+			};
+			name = Release;
+		};
+		89101CFD2A04C1E80064C993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPairUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "BJIT Express MacPair";
+			};
+			name = Debug;
+		};
+		89101CFE2A04C1E80064C993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2BL4KQW6R5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bjit.busExpress.BJIT-Express-MacPairUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "BJIT Express MacPair";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		89101CC72A04C1E70064C993 /* Build configuration list for PBXProject "BJIT Express MacPair" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89101CF42A04C1E80064C993 /* Debug */,
+				89101CF52A04C1E80064C993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89101CF62A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPair" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89101CF72A04C1E80064C993 /* Debug */,
+				89101CF82A04C1E80064C993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89101CF92A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPairTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89101CFA2A04C1E80064C993 /* Debug */,
+				89101CFB2A04C1E80064C993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89101CFC2A04C1E80064C993 /* Build configuration list for PBXNativeTarget "BJIT Express MacPairUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89101CFD2A04C1E80064C993 /* Debug */,
+				89101CFE2A04C1E80064C993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		89101CDA2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				89101CDB2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodel */,
+			);
+			currentVersion = 89101CDB2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodel */;
+			path = BJIT_Express_MacPair.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 89101CC42A04C1E70064C993 /* Project object */;
+}
