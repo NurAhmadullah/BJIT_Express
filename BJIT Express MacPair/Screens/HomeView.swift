@@ -1,22 +1,22 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  BJIT Express MacPair
 //
-//  Created by BJIT on 5/5/23.
+//  Created by BJIT on 10/5/23.
 //
 
 import SwiftUI
-import CoreData
 
-struct ContentView: View {
+struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @AppStorage("onboarding") var isonBoardingViewActive: Bool = true
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     var body: some View {
+        
         NavigationView {
             List {
                 ForEach(items) { item in
@@ -41,12 +41,12 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -56,12 +56,13 @@ struct ContentView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+        isonBoardingViewActive.toggle()
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -81,8 +82,9 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
+
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        HomeView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
