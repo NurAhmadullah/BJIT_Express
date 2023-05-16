@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
+    @AppStorage("employeeID") var savedEmployeeID: String = ""
     @State private var buttonWidth = UIScreen.main.bounds.width - 80
     @State private var employeeID: String = ""
     @State private var isValidEmployeeID = false
-    @State private var navigateToSecondView = false
     var body: some View {
-        NavigationView {
+        if savedEmployeeID.isEmpty{
             ZStack {
                 VStack{
                     Text("Enter Your Employee ID")
@@ -62,7 +62,12 @@ struct LoginView: View {
                     Spacer()
                     
                     Button(action: {
-                        navigateToSecondView = true
+                        withAnimation(Animation.easeInOut(duration: 0.5)){
+                            if isValidEmployeeID{
+                                savedEmployeeID = employeeID
+                            }
+                        }
+                        
                     }, label: {
                         Text("Continue")
                             .foregroundColor(.white)
@@ -74,13 +79,12 @@ struct LoginView: View {
                     .cornerRadius(10)
                     .contentShape(Rectangle())
                     .disabled(!isValidEmployeeID)
-                    
-                    NavigationLink(destination: TabViews(), isActive: $navigateToSecondView) {
-                        EmptyView()
-                    }
                 }
             }
+        } else{
+            TabViews()
         }
+        
     }
     func validateEmployeeID(_ input: String) -> Bool {
         let pattern = #"^\d{5}$"#
