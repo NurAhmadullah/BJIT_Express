@@ -163,7 +163,10 @@ struct MapView: View {
            Spacer()
             
             VStack {
-            Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.78 , longitude: -122.40))
+                
+                //Current destination location is -  New York City, USA
+                
+            Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 40.7128 , longitude: -74.0060))
             }
             
             
