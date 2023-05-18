@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @AppStorage("employeeID") var savedEmployeeID: String = ""
+    @State var savedEmployeeID: String = ""
     @State private var buttonWidth = UIScreen.main.bounds.width - 80
     @State private var employeeID: String = ""
     @State private var isValidEmployeeID = false
+    @EnvironmentObject private var ckManager: CloudKitManager
+    @State private var errorWrapper: ErrorWrapper?
     var body: some View {
         if savedEmployeeID.isEmpty{
             ZStack {
@@ -65,6 +67,14 @@ struct LoginView: View {
                         withAnimation(Animation.easeInOut(duration: 0.5)){
                             if isValidEmployeeID{
                                 savedEmployeeID = employeeID
+                                Task{
+                                    do{
+                                        try await ckManager.addTask(task: UserModel(name: "Yeasir", employeeId: employeeID, startTime: Date()))
+                                    }
+                                    catch{
+                                        errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
+                                    }
+                                }
                             }
                         }
                         
@@ -80,7 +90,12 @@ struct LoginView: View {
                     .contentShape(Rectangle())
                     .disabled(!isValidEmployeeID)
                 }
-            }
+            }.onAppear(perform: {
+                Task{
+                    try? await ckManager.populateTasks()
+                }
+                
+            })
         } else{
             TabViews()
         }

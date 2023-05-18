@@ -18,6 +18,10 @@
 		8941244D2A0D04BE00D7D389 /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8941244C2A0D04BE00D7D389 /* TabViews.swift */; };
 		8941244F2A0DDFDE00D7D389 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8941244E2A0DDFDE00D7D389 /* MapView.swift */; };
 		89751A352A0FDC06006045BF /* PassengerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89751A342A0FDC06006045BF /* PassengerListView.swift */; };
+		89922E9A2A16161D00653588 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E992A16161D00653588 /* UserModel.swift */; };
+		89922E9C2A16162C00653588 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E9B2A16162C00653588 /* BusModel.swift */; };
+		89922E9E2A16163600653588 /* SeatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E9D2A16163600653588 /* SeatModel.swift */; };
+		89922EA02A1616DA00653588 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E9F2A1616DA00653588 /* CloudKitManager.swift */; };
 		89ADF9262A0B9C810075DFC1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF9252A0B9C810075DFC1 /* OnboardingView.swift */; };
 		89ADF9282A0BA7470075DFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89ADF9272A0BA7470075DFC1 /* Assets.xcassets */; };
 		89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */; };
@@ -59,6 +63,10 @@
 		8941244C2A0D04BE00D7D389 /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
 		8941244E2A0DDFDE00D7D389 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		89751A342A0FDC06006045BF /* PassengerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerListView.swift; sourceTree = "<group>"; };
+		89922E992A16161D00653588 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		89922E9B2A16162C00653588 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
+		89922E9D2A16163600653588 /* SeatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatModel.swift; sourceTree = "<group>"; };
+		89922E9F2A1616DA00653588 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		89ADF9252A0B9C810075DFC1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		89ADF9272A0BA7470075DFC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -116,6 +124,8 @@
 			children = (
 				89304E102A0A001600923508 /* BJIT Express MacPair.entitlements */,
 				89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */,
+				89922E9F2A1616DA00653588 /* CloudKitManager.swift */,
+				89922E982A1615FB00653588 /* Models */,
 				89ADF92B2A0BB1B50075DFC1 /* Screens */,
 				89101CD82A04C1E80064C993 /* Persistence.swift */,
 				89ADF9272A0BA7470075DFC1 /* Assets.xcassets */,
@@ -149,6 +159,16 @@
 				89101CF22A04C1E80064C993 /* BJIT_Express_MacPairUITestsLaunchTests.swift */,
 			);
 			path = "BJIT Express MacPairUITests";
+			sourceTree = "<group>";
+		};
+		89922E982A1615FB00653588 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				89922E992A16161D00653588 /* UserModel.swift */,
+				89922E9B2A16162C00653588 /* BusModel.swift */,
+				89922E9D2A16163600653588 /* SeatModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		89ADF92B2A0BB1B50075DFC1 /* Screens */ = {
@@ -302,11 +322,15 @@
 				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
 				89751A352A0FDC06006045BF /* PassengerListView.swift in Sources */,
 				89101CD22A04C1E70064C993 /* ContentView.swift in Sources */,
+				89922E9E2A16163600653588 /* SeatModel.swift in Sources */,
 				89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */,
 				89ADF9262A0B9C810075DFC1 /* OnboardingView.swift in Sources */,
 				8941244F2A0DDFDE00D7D389 /* MapView.swift in Sources */,
+				89922E9C2A16162C00653588 /* BusModel.swift in Sources */,
 				89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */,
+				89922E9A2A16161D00653588 /* UserModel.swift in Sources */,
 				8941244D2A0D04BE00D7D389 /* TabViews.swift in Sources */,
+				89922EA02A1616DA00653588 /* CloudKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -447,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -477,7 +501,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -513,7 +537,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,7 +566,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2BL4KQW6R5;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjitgroup.upskill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -568,7 +592,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = 2BL4KQW6R5;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjitgroup.upskill;
 				PRODUCT_NAME = "$(TARGET_NAME)";

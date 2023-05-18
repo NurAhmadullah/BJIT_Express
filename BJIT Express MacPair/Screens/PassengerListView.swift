@@ -55,6 +55,7 @@ struct DataItem {
 }
 
 struct PassengerListView: View {
+    /*
     let dataset: [DataItem] = {
         var data: [DataItem] = []
         for i in 1...40 {
@@ -67,6 +68,10 @@ struct PassengerListView: View {
         data = data.sorted(by: {$0.remTime < $1.remTime})
         return data
     }()
+    */
+    
+    @EnvironmentObject private var ckManager: CloudKitManager
+    
     
     var body: some View {
 
@@ -99,13 +104,13 @@ struct PassengerListView: View {
                                         .font(.headline)
                                         .foregroundColor(.secondary)
 
-                    ForEach(dataset, id: \.id) { item in
+                    ForEach(ckManager.users, id: \.recordId) { item in
                         HStack {
-                            Text(String(item.id))
+                            Text(String(item.employeeId))
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            Text(formatTimeInterval(item.remTime))
-                                .frame(maxWidth: .infinity)
-                            Text(item.isOnboard ? "Onboard" : "Not onboard")
+//                            Text(formatTimeInterval(item.startTime))
+//                                .frame(maxWidth: .infinity)
+                            Text(item.isActive ? "Onboard" : "Not onboard")
                                 .frame(maxWidth: .infinity)
                                 .frame(alignment: .trailing)
                         }
