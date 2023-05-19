@@ -69,7 +69,7 @@ struct LoginView: View {
                                 savedEmployeeID = employeeID
                                 Task{
                                     do{
-                                        try await ckManager.addTask(task: UserModel(name: "Yeasir", employeeId: employeeID, startTime: Date()))
+                                        try await ckManager.addUser(user: UserModel(name: "Yeasir", employeeId: employeeID, startTime: Date()))
                                     }
                                     catch{
                                         errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
@@ -92,7 +92,7 @@ struct LoginView: View {
                 }
             }.onAppear(perform: {
                 Task{
-                    try? await ckManager.populateTasks()
+                    try? await ckManager.populateUsers()
                 }
                 
             })

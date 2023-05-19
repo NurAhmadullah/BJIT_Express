@@ -10,6 +10,7 @@ import CloudKit
 
 enum UserModelKeys: String {
     case type = "CKUserModel"
+    case sortKey = "employeeId"
 //    case taskName = "taskName"
 //    case dateAssigned = "dateAssigned"
 //    case isCompleted = "isCompleted"
@@ -41,7 +42,6 @@ extension UserModel {
         
         guard let name = record["name"] as? String,
               let employeeId = record["employeeId"] as? String,
-              let isActive = record["isActive"] as? Bool,
               let startTime = record["startTime"] as? Date else {
             return nil
         }

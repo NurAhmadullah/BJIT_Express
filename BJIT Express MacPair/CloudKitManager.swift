@@ -31,16 +31,24 @@ struct ErrorWrapper: Identifiable {
 class CloudKitManager: ObservableObject {
     private var db = CKContainer.init(identifier: "iCloud.teamMacPair.bjitgroup.upskilldev").publicCloudDatabase
     @Published private var usersDictionary: [CKRecord.ID: UserModel] = [:]
+    @Published private var busDictionary: [CKRecord.ID: BusModel] = [:]
+    @Published private var seatsDictionary: [CKRecord.ID: SeatModel] = [:]
     
     var users: [UserModel] {
         usersDictionary.values.compactMap { $0 }
     }
+    var seats: [SeatModel] {
+        seatsDictionary.values.compactMap { $0 }
+    }
+    var buses: [BusModel] {
+        busDictionary.values.compactMap { $0 }
+    }
     
     
-    func populateTasks() async throws {
+    func populateUsers() async throws {
         
         let query = CKQuery(recordType: UserModelKeys.type.rawValue, predicate: NSPredicate(value: true))
-        query.sortDescriptors = [NSSortDescriptor(key: "employeeId", ascending: false)]
+        query.sortDescriptors = [NSSortDescriptor(key: UserModelKeys.sortKey.rawValue, ascending: false)]
         let result = try await db.records(matching: query)
         let records = result.matchResults.compactMap { try? $0.1.get() }
         
@@ -49,43 +57,110 @@ class CloudKitManager: ObservableObject {
         }
     }
     
-    
-    func addTask(task: UserModel) async throws {
-        let record = try await db.save(task.record)
-        guard let task = UserModel(record: record) else { return }
+    func populateBus() async throws {
         
-        usersDictionary[task.recordId!] = task
+        let query = CKQuery(recordType: BusModelKeys.type.rawValue, predicate: NSPredicate(value: true))
+        query.sortDescriptors = [NSSortDescriptor(key: BusModelKeys.sortKey.rawValue, ascending: false)]
+        let result = try await db.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        
+        records.forEach { record in
+            busDictionary[record.recordID] = BusModel(record: record)
+        }
     }
     
-    func deleteTask(taskToBeDeleted: UserModel) async throws {
+    func populateSeats() async throws {
         
-        usersDictionary.removeValue(forKey: taskToBeDeleted.recordId!)
+        let query = CKQuery(recordType: SeatModelKeys.type.rawValue, predicate: NSPredicate(value: true))
+        query.sortDescriptors = [NSSortDescriptor(key: SeatModelKeys.sortKey.rawValue, ascending: false)]
+        let result = try await db.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+        
+        records.forEach { record in
+            seatsDictionary[record.recordID] = SeatModel(record: record, busId: "1")
+        }
+    }
+    
+    
+    func addUser(user: UserModel) async throws {
+        let record = try await db.save(user.record)
+        guard let user = UserModel(record: record) else { return }
+        
+        usersDictionary[user.recordId!] = user
+    }
+    
+    func addBus(bus: BusModel) async throws {
+        let record = try await db.save(bus.record)
+        guard let bus = BusModel(record: record) else { return }
+        
+        busDictionary[bus.recordId!] = bus
+    }
+    
+    func addSeat(seat: SeatModel, busId:String) async throws {
+        let record = try await db.save(seat.record)
+        guard let seat = SeatModel(record: record, busId: busId) else { return }
+        
+        seatsDictionary[seat.recordId!] = seat
+    }
+    
+    
+    func deleteUser(userToBeDeleted: UserModel) async throws {
+        
+        usersDictionary.removeValue(forKey: userToBeDeleted.recordId!)
         
         do {
-            let _ = try await db.deleteRecord(withID: taskToBeDeleted.recordId!)
+            let _ = try await db.deleteRecord(withID: userToBeDeleted.recordId!)
         } catch {
             // put back the task into the tasks array
-            usersDictionary[taskToBeDeleted.recordId!] = taskToBeDeleted
+            usersDictionary[userToBeDeleted.recordId!] = userToBeDeleted
             // throw the exception
             throw TaskError.operationFailed(error)
         }
     }
     
-    func updateTask(editedTask: UserModel) async {
+    func deleteBus(busToBeDeleted: BusModel) async throws {
         
-        usersDictionary[editedTask.recordId!]?.isActive = editedTask.isActive
+        busDictionary.removeValue(forKey: busToBeDeleted.recordId!)
+        
+        do {
+            let _ = try await db.deleteRecord(withID: busToBeDeleted.recordId!)
+        } catch {
+            // put back the task into the tasks array
+            busDictionary[busToBeDeleted.recordId!] = busToBeDeleted
+            // throw the exception
+            throw TaskError.operationFailed(error)
+        }
+    }
+    
+    func deleteSeat(seatToBeDeleted: SeatModel) async throws {
+        
+        seatsDictionary.removeValue(forKey: seatToBeDeleted.recordId!)
+        
+        do {
+            let _ = try await db.deleteRecord(withID: seatToBeDeleted.recordId!)
+        } catch {
+            // put back the task into the tasks array
+            seatsDictionary[seatToBeDeleted.recordId!] = seatToBeDeleted
+            // throw the exception
+            throw TaskError.operationFailed(error)
+        }
+    }
+    
+    func updateUser(editedUser: UserModel) async {
+        
+        usersDictionary[editedUser.recordId!]?.isActive = editedUser.isActive
         
         do {
         
-            let record = try await db.record(for: editedTask.recordId!)
-            record["isActive"] = editedTask.isActive
+            let record = try await db.record(for: editedUser.recordId!)
+            record["isActive"] = editedUser.isActive
             
             // save it
             try await db.save(record)
         } catch {
             
             // rollback the update
-            usersDictionary[editedTask.recordId!] = editedTask
+            usersDictionary[editedUser.recordId!] = editedUser
         }
     }
 

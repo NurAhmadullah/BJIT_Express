@@ -27,6 +27,7 @@
 		89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */; };
 		89ADF92D2A0BB2260075DFC1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF92C2A0BB2260075DFC1 /* LoginView.swift */; };
 		89ADF92F2A0CB34B0075DFC1 /* BusLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF92E2A0CB34B0075DFC1 /* BusLayoutView.swift */; };
+		89F6AECE2A1798810088D2C1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F6AECD2A1798810088D2C1 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		89ADF92C2A0BB2260075DFC1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89ADF92E2A0CB34B0075DFC1 /* BusLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLayoutView.swift; sourceTree = "<group>"; };
+		89F6AECD2A1798810088D2C1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				89304E102A0A001600923508 /* BJIT Express MacPair.entitlements */,
 				89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */,
 				89922E9F2A1616DA00653588 /* CloudKitManager.swift */,
+				89F6AECC2A17986B0088D2C1 /* ViewModel */,
 				89922E982A1615FB00653588 /* Models */,
 				89ADF92B2A0BB1B50075DFC1 /* Screens */,
 				89101CD82A04C1E80064C993 /* Persistence.swift */,
@@ -184,6 +187,14 @@
 				8941244C2A0D04BE00D7D389 /* TabViews.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		89F6AECC2A17986B0088D2C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				89F6AECD2A1798810088D2C1 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				89101CD92A04C1E80064C993 /* Persistence.swift in Sources */,
 				89ADF92F2A0CB34B0075DFC1 /* BusLayoutView.swift in Sources */,
 				89ADF92D2A0BB2260075DFC1 /* LoginView.swift in Sources */,
+				89F6AECE2A1798810088D2C1 /* HomeViewModel.swift in Sources */,
 				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
 				89751A352A0FDC06006045BF /* PassengerListView.swift in Sources */,
 				89101CD22A04C1E70064C993 /* ContentView.swift in Sources */,
@@ -495,6 +507,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BJIT Express";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide personalized content and services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -531,6 +544,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "BJIT Express";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide personalized content and services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
