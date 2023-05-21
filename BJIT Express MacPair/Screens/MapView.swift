@@ -71,6 +71,7 @@ struct Map: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
         // Remove existing overlays
         mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
         
         // Add a polyline overlay between source and destination
         let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
@@ -102,9 +103,9 @@ struct Map: UIViewRepresentable {
             distance = String(format: "%.2f km", distanceInKm)
             
             let distanceAnnotation = MKPointAnnotation()
-            distanceAnnotation.title = "Distance"
-            distanceAnnotation.subtitle = distance
-            distanceAnnotation.coordinate = CLLocationCoordinate2D(latitude: (self.sourceLocation.latitude + self.destinationLocation.latitude) / 2, longitude: (self.sourceLocation.longitude + self.destinationLocation.longitude) / 2)
+            distanceAnnotation.title = estimatedArrivalTime
+            let index = route.polyline.pointCount/2
+            distanceAnnotation.coordinate = route.polyline.points()[index].coordinate
             
             mapView.addAnnotation(distanceAnnotation)
         }
@@ -133,7 +134,7 @@ struct Map: UIViewRepresentable {
             if overlay is MKPolyline {
                 let renderer = MKPolylineRenderer(overlay: overlay)
                 renderer.strokeColor = .systemBlue
-                renderer.lineWidth = 4
+                renderer.lineWidth = 7
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
