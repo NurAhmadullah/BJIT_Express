@@ -14,26 +14,26 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationString: String = ""
     @Published var latitude: Double = 0.0
     @Published var longitude: Double = 0.0
-
+    
     override init() {
         super.init()
         locationManager.delegate = self
     }
-
+    
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
-
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            latitude = location.coordinate.latitude
-            longitude = location.coordinate.longitude
-
+            latitude = location.coordinate.latitude //37.4074565
+            longitude = location.coordinate.longitude //-122.21184
+            
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
                 if let placemark = placemarks?.first {
@@ -44,7 +44,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager error: \(error.localizedDescription)")
     }
@@ -58,7 +58,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 struct Map: UIViewRepresentable {
     let sourceLocation: CLLocationCoordinate2D
     let destinationLocation: CLLocationCoordinate2D
-
+    @Binding var selectedTransportType: MKDirectionsTransportType
+    @Binding var estimatedArrivalTime: String
+    @Binding var distance: String
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -79,21 +82,29 @@ struct Map: UIViewRepresentable {
         let request = MKDirections.Request()
         request.source = sourceItem
         request.destination = destinationItem
-        request.transportType = .automobile
+        request.transportType = selectedTransportType
         
         let directions = MKDirections(request: request)
         directions.calculate { (response, error) in
-            guard let route = response?.routes.first else { return }
+            guard let route = response?.routes.first else {
+                estimatedArrivalTime = "No Routes found."
+                distance = ""
+                return }
             mapView.addOverlay(route.polyline)
+            let eta = route.expectedTravelTime
+            let formattedETA = DateComponentsFormatter()
+            formattedETA.unitsStyle = .abbreviated
+            let formattedString = formattedETA.string(from: eta)
+            estimatedArrivalTime = "\(formattedString ?? "")"
+            print("Estimated arrival time: \(formattedString ?? "")")
             
-            let distance = route.distance / 1000 // Convert distance to kilometers
-            let distanceString = String(format: "%.2f km", distance)
+            let distanceInKm = route.distance / 1000 // Convert distance to kilometers
+            distance = String(format: "%.2f km", distanceInKm)
             
             let distanceAnnotation = MKPointAnnotation()
             distanceAnnotation.title = "Distance"
-            distanceAnnotation.subtitle = distanceString
-            distanceAnnotation.coordinate = CLLocationCoordinate2D(latitude: (self.sourceLocation.latitude + self.destinationLocation.latitude) / 2,
-                                                                  longitude: (self.sourceLocation.longitude + self.destinationLocation.longitude) / 2)
+            distanceAnnotation.subtitle = distance
+            distanceAnnotation.coordinate = CLLocationCoordinate2D(latitude: (self.sourceLocation.latitude + self.destinationLocation.latitude) / 2, longitude: (self.sourceLocation.longitude + self.destinationLocation.longitude) / 2)
             
             mapView.addAnnotation(distanceAnnotation)
         }
@@ -106,7 +117,7 @@ struct Map: UIViewRepresentable {
         let region = MKCoordinateRegion(center: centerCoordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -130,53 +141,52 @@ struct Map: UIViewRepresentable {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
 struct MapView: View {
    
     @StateObject private var locationProvider = LocationManager()
-    
+    @State private var selectedTransportType: MKDirectionsTransportType = .automobile
+    @State private var eta: String = ""
+    @State private var distance: String = ""
     var body: some View {
         VStack {
-   
-            Spacer()
-          
-            Button("Get Your Current Location") {
-                locationProvider.requestLocation()
-            }
-            
-            HStack {
-                Text("Latitude: \(locationProvider.latitude)")
-                    
-                Text("Longitude: \(locationProvider.longitude)")
-                    .padding()
-            }
-            
-           Spacer()
             
             VStack {
-            Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.78 , longitude: -122.40))
+                MapTopView()
+                VehicleSelectionView(selectedVehicle: $selectedTransportType)
+                
+                Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.4253688 , longitude: -122.1464785), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance)
+                    .cornerRadius(10)
+                    .onAppear {
+                        locationProvider.requestLocation()
+                    }
+                VStack(alignment: .leading){
+                    Rectangle()
+                        .frame(height: 0)
+                    HStack{
+                        Text(eta)
+                            .foregroundColor(.red)
+                        Text(distance.isEmpty ? "" : "(\(distance))")
+                            .foregroundColor(.gray)
+                    }
+                    .font(.system(size: 20, design: .rounded))
+                    Button(action: {
+                        //Start Button Action
+                    }, label: {
+                        HStack{
+                            Image(systemName: "location.north")
+                            Text("Start")
+                            
+                        }.padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .foregroundColor(Color("startButtonTextColor"))
+                        
+                    })
+                    .background(Color("startButtonColor"))
+                    .cornerRadius(20)
+                    .buttonStyle(.borderless)
+                }
+                .padding(.horizontal, 10)
             }
-            
-            
-            
-            
-            
         }
-        .onAppear {
-            locationProvider.requestLocation()
-        }
+    }
 }
-}
-
-
-
-

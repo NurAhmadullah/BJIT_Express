@@ -42,10 +42,11 @@ extension UserModel {
         
         guard let name = record["name"] as? String,
               let employeeId = record["employeeId"] as? String,
+              let isActive = record["isActive"] as? Bool,
               let startTime = record["startTime"] as? Date else {
             return nil
         }
-        self.init(recordId: record.recordID, name: name, employeeId: employeeId, startTime: startTime)
+        self.init(recordId: record.recordID, name: name, employeeId: employeeId, isActive: isActive, startTime: startTime)
     }
 }
 

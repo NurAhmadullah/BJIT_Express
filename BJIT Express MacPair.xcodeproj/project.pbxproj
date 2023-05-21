@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89032FB82A1798FE008434CD /* VehicleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FB72A1798FE008434CD /* VehicleSelectionView.swift */; };
+		89032FBA2A1924CF008434CD /* MapTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FB92A1924CF008434CD /* MapTopView.swift */; };
 		89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */; };
 		89101CD22A04C1E70064C993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CD12A04C1E70064C993 /* ContentView.swift */; };
 		89101CD72A04C1E80064C993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89101CD62A04C1E80064C993 /* Preview Assets.xcassets */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		89032FB72A1798FE008434CD /* VehicleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSelectionView.swift; sourceTree = "<group>"; };
+		89032FB92A1924CF008434CD /* MapTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTopView.swift; sourceTree = "<group>"; };
 		89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BJIT Express MacPair.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairApp.swift; sourceTree = "<group>"; };
 		89101CD12A04C1E70064C993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		89032FBB2A1A1F28008434CD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				89032FB72A1798FE008434CD /* VehicleSelectionView.swift */,
+				89032FB92A1924CF008434CD /* MapTopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		89101CC32A04C1E70064C993 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +142,7 @@
 				89922E9F2A1616DA00653588 /* CloudKitManager.swift */,
 				89F6AECC2A17986B0088D2C1 /* ViewModel */,
 				89922E982A1615FB00653588 /* Models */,
+				89032FBB2A1A1F28008434CD /* Views */,
 				89ADF92B2A0BB1B50075DFC1 /* Screens */,
 				89101CD82A04C1E80064C993 /* Persistence.swift */,
 				89ADF9272A0BA7470075DFC1 /* Assets.xcassets */,
@@ -334,12 +348,14 @@
 				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
 				89751A352A0FDC06006045BF /* PassengerListView.swift in Sources */,
 				89101CD22A04C1E70064C993 /* ContentView.swift in Sources */,
+				89032FB82A1798FE008434CD /* VehicleSelectionView.swift in Sources */,
 				89922E9E2A16163600653588 /* SeatModel.swift in Sources */,
 				89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */,
 				89ADF9262A0B9C810075DFC1 /* OnboardingView.swift in Sources */,
 				8941244F2A0DDFDE00D7D389 /* MapView.swift in Sources */,
 				89922E9C2A16162C00653588 /* BusModel.swift in Sources */,
 				89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */,
+				89032FBA2A1924CF008434CD /* MapTopView.swift in Sources */,
 				89922E9A2A16161D00653588 /* UserModel.swift in Sources */,
 				8941244D2A0D04BE00D7D389 /* TabViews.swift in Sources */,
 				89922EA02A1616DA00653588 /* CloudKitManager.swift in Sources */,

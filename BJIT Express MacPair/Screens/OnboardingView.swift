@@ -37,10 +37,8 @@ struct OnboardingView: View {
                 Text("Welcome to BJIT Xpress!")
                     .font(.system(.title2, design: .rounded))
                     .fontWeight(.semibold)
-                    .foregroundColor(.black)
                 Text("For a optimized life!")
                     .fontWeight(.semibold)
-                    .foregroundColor(.black)
                     .padding(.vertical, 10)
                 Spacer()
                 Button(action: {

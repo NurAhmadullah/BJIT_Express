@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @State var isonBoardingViewActive: Bool = false
+    @AppStorage("onboarding") var isonBoardingViewActive: Bool = true
     var body: some View {
         ZStack{
             if isonBoardingViewActive{

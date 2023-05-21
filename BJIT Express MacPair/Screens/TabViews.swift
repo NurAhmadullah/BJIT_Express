@@ -10,6 +10,11 @@ import SwiftUI
 struct TabViews: View {
     var body: some View {
         TabView {
+            MapView()
+                .tabItem {
+                    Image(systemName: "map.fill")
+                    Text("Map")
+                }
             BusLayoutView()
                 .tabItem {
                     Image(systemName: "bus.fill")
@@ -19,11 +24,6 @@ struct TabViews: View {
                 .tabItem {
                     Image(systemName: "person.crop.rectangle.stack.fill")
                     Text("Passengers")
-                }
-            MapView()
-                .tabItem {
-                    Image(systemName: "map.fill")
-                    Text("Map")
                 }
         }.accentColor(.green)
     }

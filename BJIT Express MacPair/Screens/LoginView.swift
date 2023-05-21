@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var savedEmployeeID: String = ""
+    @AppStorage("employeeID") var savedEmployeeID: String = ""
     @State private var buttonWidth = UIScreen.main.bounds.width - 80
     @State private var employeeID: String = ""
     @State private var isValidEmployeeID = false
@@ -69,7 +69,7 @@ struct LoginView: View {
                                 savedEmployeeID = employeeID
                                 Task{
                                     do{
-                                        try await ckManager.addUser(user: UserModel(name: "Yeasir", employeeId: employeeID, startTime: Date()))
+                                        try await ckManager.addUser(user: UserModel(name: "Yeasir", employeeId: employeeID, isActive: true, startTime: Date()))
                                     }
                                     catch{
                                         errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
