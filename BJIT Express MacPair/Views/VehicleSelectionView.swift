@@ -37,7 +37,7 @@ struct VehicleSelectionView: View {
                     .background{
                         if selectedVehicle == mode.vehicleType{
                             Rectangle()
-                                .fill(.blue.opacity(0.2))
+                                .fill(.blue.opacity(0.3))
                                 .matchedGeometryEffect(id: "buttonID", in: animation)
                         } else{
                             Rectangle()

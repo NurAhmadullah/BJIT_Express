@@ -21,7 +21,6 @@ struct LoginView: View {
                     Text("Enter Your Employee ID")
                         .font(.system(size: 25))
                         .fontWeight(.semibold)
-                        .foregroundColor(.black)
                         .transition(.opacity)
                         .padding(.vertical, 10)
                         .padding(.horizontal, 20)
