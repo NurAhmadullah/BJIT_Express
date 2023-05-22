@@ -22,10 +22,11 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func requestLocation() {
         locationManager.requestWhenInUseAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
+        DispatchQueue.global().async {[weak self] in
+            if CLLocationManager.locationServicesEnabled() {
+                self?.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self?.locationManager.startUpdatingLocation()
+            }
         }
     }
     
