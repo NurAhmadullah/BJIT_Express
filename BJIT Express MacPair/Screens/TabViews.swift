@@ -20,12 +20,17 @@ struct TabViews: View {
                     Image(systemName: "bus.fill")
                     Text("Buses")
                 }
-            PassengerListView()
-                .tabItem {
-                    Image(systemName: "person.crop.rectangle.stack.fill")
-                    Text("Passengers")
-                }
+//            PassengerListView()
+//                .tabItem {
+//                    Image(systemName: "person.crop.rectangle.stack.fill")
+//                    Text("Passengers")
+//                }
         }.accentColor(.green)
+            .onAppear {
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithDefaultBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
     }
 }
 

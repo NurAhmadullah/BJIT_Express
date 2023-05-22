@@ -19,10 +19,12 @@ struct BusListView: View {
                     .foregroundColor(.secondary)
                 
                 ForEach(numbers, id: \.self) { bus in //ForEach(buses, id: \.recordId) { bus in
-                    NavigationLink(destination: BusLayoutView(seatsReserved: numberOfReserved, seatsFilled: bus))  {
+                    NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: bus))  {
                         ListRowView(column1: "bus\(bus)", column2: "\(bus)", column3: "50", column4: getFormatedDate(date: Date()))                    }
                 }
-            } .navigationTitle("Bus List")
+            }
+            .navigationTitle("Bus List")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     func getFormatedDate(date: Date)->String{

@@ -62,6 +62,7 @@ struct Map: UIViewRepresentable {
     @Binding var selectedTransportType: MKDirectionsTransportType
     @Binding var estimatedArrivalTime: String
     @Binding var distance: String
+    @Binding var canStart: Bool
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -91,7 +92,9 @@ struct Map: UIViewRepresentable {
             guard let route = response?.routes.first else {
                 estimatedArrivalTime = "No Routes found."
                 distance = ""
-                return }
+                canStart = false
+                return
+            }
             mapView.addOverlay(route.polyline)
             let eta = route.expectedTravelTime
             let formattedETA = DateComponentsFormatter()
@@ -99,6 +102,7 @@ struct Map: UIViewRepresentable {
             let formattedString = formattedETA.string(from: eta)
             estimatedArrivalTime = "\(formattedString ?? "")"
             print("Estimated arrival time: \(formattedString ?? "")")
+            canStart = true
             
             let distanceInKm = route.distance / 1000 // Convert distance to kilometers
             distance = String(format: "%.2f km", distanceInKm)
@@ -149,6 +153,7 @@ struct MapView: View {
     @State private var selectedTransportType: MKDirectionsTransportType = .automobile
     @State private var eta: String = ""
     @State private var distance: String = ""
+    @State private var canStart: Bool = false
     var body: some View {
         VStack {
             
@@ -156,7 +161,7 @@ struct MapView: View {
                 MapTopView()
                 VehicleSelectionView(selectedVehicle: $selectedTransportType)
                 
-                Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.4253688 , longitude: -122.1464785), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance)
+                Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.4253688 , longitude: -122.1464785), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance, canStart: $canStart)
                     .cornerRadius(10)
                     .onAppear {
                         locationProvider.requestLocation()
@@ -186,6 +191,7 @@ struct MapView: View {
                     .background(Color("startButtonColor"))
                     .cornerRadius(20)
                     .buttonStyle(.borderless)
+                    .disabled(!canStart)
                 }
                 .padding(.horizontal, 10)
             }

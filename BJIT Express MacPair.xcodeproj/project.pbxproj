@@ -11,6 +11,7 @@
 		89032FBA2A1924CF008434CD /* MapTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FB92A1924CF008434CD /* MapTopView.swift */; };
 		89032FBD2A1B1AD3008434CD /* BusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FBC2A1B1AD3008434CD /* BusListView.swift */; };
 		89032FBF2A1B38CD008434CD /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FBE2A1B38CD008434CD /* ListRowView.swift */; };
+		89032FC12A1B79A3008434CD /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FC02A1B79A3008434CD /* DetailsView.swift */; };
 		89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */; };
 		89101CD22A04C1E70064C993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CD12A04C1E70064C993 /* ContentView.swift */; };
 		89101CD72A04C1E80064C993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89101CD62A04C1E80064C993 /* Preview Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		89032FB92A1924CF008434CD /* MapTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTopView.swift; sourceTree = "<group>"; };
 		89032FBC2A1B1AD3008434CD /* BusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusListView.swift; sourceTree = "<group>"; };
 		89032FBE2A1B38CD008434CD /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
+		89032FC02A1B79A3008434CD /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BJIT Express MacPair.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairApp.swift; sourceTree = "<group>"; };
 		89101CD12A04C1E70064C993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				89101CD12A04C1E70064C993 /* ContentView.swift */,
 				89ADF92E2A0CB34B0075DFC1 /* BusLayoutView.swift */,
 				8941244E2A0DDFDE00D7D389 /* MapView.swift */,
+				89032FC02A1B79A3008434CD /* DetailsView.swift */,
 				89751A342A0FDC06006045BF /* PassengerListView.swift */,
 				89ADF92C2A0BB2260075DFC1 /* LoginView.swift */,
 				89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */,
@@ -355,6 +358,7 @@
 				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
 				89751A352A0FDC06006045BF /* PassengerListView.swift in Sources */,
 				89101CD22A04C1E70064C993 /* ContentView.swift in Sources */,
+				89032FC12A1B79A3008434CD /* DetailsView.swift in Sources */,
 				89032FB82A1798FE008434CD /* VehicleSelectionView.swift in Sources */,
 				89922E9E2A16163600653588 /* SeatModel.swift in Sources */,
 				89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */,
