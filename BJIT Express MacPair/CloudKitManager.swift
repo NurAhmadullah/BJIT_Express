@@ -14,6 +14,23 @@ import CloudKit
 //var isActive: Bool = false
 //var startTime: Date
 
+class CloudKitDefaults{
+    private let keyValueStore = NSUbiquitousKeyValueStore.default
+    static let shared = CloudKitDefaults()
+    let isInitialSetupDone = "isInitialSetupDone"
+    private init(){}
+
+    func setBooleanValue(key:String, boolValue: Bool){
+        keyValueStore.set(boolValue, forKey: key)
+    }
+    func getBooleanValue(key:String)->Bool{
+        keyValueStore.bool(forKey: key)
+    }
+}
+
+
+
+
 enum TaskError: Error {
     case operationFailed(Error)
 }
@@ -44,6 +61,25 @@ class CloudKitManager: ObservableObject {
         busDictionary.values.compactMap { $0 }
     }
     
+    
+    func setupInitialBussesAndSeats() async{
+        if !CloudKitDefaults.shared.getBooleanValue(key: CloudKitDefaults.shared.isInitialSetupDone){
+            do{
+                try? await addBus(bus: BusModel(name: "BJIT Bus", busId: "1", startTime: Date()))
+                try? await addBus(bus: BusModel(name: "Gulshan Chaka", busId: "2", startTime: Date()))
+                try? await addBus(bus: BusModel(name: "Dhaka Chaka", busId: "3", startTime: Date()))
+                
+                var allSeatCnt = 0
+                for bus in self.buses{
+                    for seatNumber in 1...50{
+                        try? await addSeat(seat: SeatModel(seatId: "\(allSeatCnt)", busId: bus.busId, seatNumber: seatNumber, bookedBy: "0"), busId: bus.busId)
+                        allSeatCnt += 1
+                    }
+                }
+            }
+        }
+        CloudKitDefaults.shared.setBooleanValue(key: CloudKitDefaults.shared.isInitialSetupDone, boolValue: true)
+    }
     
     func populateUsers() async throws {
         
