@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		89032FB82A1798FE008434CD /* VehicleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FB72A1798FE008434CD /* VehicleSelectionView.swift */; };
 		89032FBA2A1924CF008434CD /* MapTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FB92A1924CF008434CD /* MapTopView.swift */; };
+		89032FBD2A1B1AD3008434CD /* BusListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FBC2A1B1AD3008434CD /* BusListView.swift */; };
+		89032FBF2A1B38CD008434CD /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89032FBE2A1B38CD008434CD /* ListRowView.swift */; };
 		89101CD02A04C1E70064C993 /* BJIT_Express_MacPairApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */; };
 		89101CD22A04C1E70064C993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89101CD12A04C1E70064C993 /* ContentView.swift */; };
 		89101CD72A04C1E80064C993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89101CD62A04C1E80064C993 /* Preview Assets.xcassets */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		89032FB72A1798FE008434CD /* VehicleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleSelectionView.swift; sourceTree = "<group>"; };
 		89032FB92A1924CF008434CD /* MapTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTopView.swift; sourceTree = "<group>"; };
+		89032FBC2A1B1AD3008434CD /* BusListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusListView.swift; sourceTree = "<group>"; };
+		89032FBE2A1B38CD008434CD /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		89101CCC2A04C1E70064C993 /* BJIT Express MacPair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BJIT Express MacPair.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJIT_Express_MacPairApp.swift; sourceTree = "<group>"; };
 		89101CD12A04C1E70064C993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 			children = (
 				89032FB72A1798FE008434CD /* VehicleSelectionView.swift */,
 				89032FB92A1924CF008434CD /* MapTopView.swift */,
+				89032FBE2A1B38CD008434CD /* ListRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */,
 				89ADF9252A0B9C810075DFC1 /* OnboardingView.swift */,
 				8941244C2A0D04BE00D7D389 /* TabViews.swift */,
+				89032FBC2A1B1AD3008434CD /* BusListView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89032FBF2A1B38CD008434CD /* ListRowView.swift in Sources */,
 				89101CD92A04C1E80064C993 /* Persistence.swift in Sources */,
 				89ADF92F2A0CB34B0075DFC1 /* BusLayoutView.swift in Sources */,
 				89ADF92D2A0BB2260075DFC1 /* LoginView.swift in Sources */,
@@ -358,6 +365,7 @@
 				89032FBA2A1924CF008434CD /* MapTopView.swift in Sources */,
 				89922E9A2A16161D00653588 /* UserModel.swift in Sources */,
 				8941244D2A0D04BE00D7D389 /* TabViews.swift in Sources */,
+				89032FBD2A1B1AD3008434CD /* BusListView.swift in Sources */,
 				89922EA02A1616DA00653588 /* CloudKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

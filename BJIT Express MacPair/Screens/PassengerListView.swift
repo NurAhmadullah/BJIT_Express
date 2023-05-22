@@ -92,32 +92,23 @@ struct PassengerListView: View {
             })
             List{
                 Section {
-                    HStack {
-                        Text("Employee ID")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Text("Remaining time")
-                            .frame(maxWidth: .infinity)
-                        Text("Onboard or Not onboard")
-                            .frame(maxWidth: .infinity)
-                            .frame(alignment: .trailing)
-                    }
-                                        .font(.headline)
-                                        .foregroundColor(.secondary)
-
+                        ListRowView(column1: "Employee ID", column2: "Remaining time", column3: nil, column4: "Status")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                    
                     ForEach(ckManager.users, id: \.recordId) { item in
                         HStack {
-                            Text(String(item.employeeId))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-//                            Text(formatTimeInterval(item.startTime))
-//                                .frame(maxWidth: .infinity)
-                            Text(item.isActive ? "Onboard" : "Not onboard")
-                                .frame(maxWidth: .infinity)
-                                .frame(alignment: .trailing)
+                            ListRowView(column1: item.employeeId, column2: getFormatedDate(date: item.startTime), column3: nil, column4: item.isActive ? "Active" : "Inactive")
                         }
                     }
                 }
             }
-        }
+        }.onAppear(perform: {
+            Task{
+                try? await ckManager.populateUsers()
+            }
+        })
+        
     }
     func formatTimeInterval(_ timeInterval: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
@@ -125,6 +116,13 @@ struct PassengerListView: View {
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
         return formatter.string(from: timeInterval) ?? ""
+    }
+    func getFormatedDate(date: Date)->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm" // Specify your desired date format
+        
+        let dateString = dateFormatter.string(from: date)
+        return dateString
     }
 }
 

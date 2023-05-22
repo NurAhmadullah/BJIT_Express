@@ -15,10 +15,10 @@ struct TabViews: View {
                     Image(systemName: "map.fill")
                     Text("Map")
                 }
-            BusLayoutView()
+            BusListView()
                 .tabItem {
                     Image(systemName: "bus.fill")
-                    Text("Seats")
+                    Text("Buses")
                 }
             PassengerListView()
                 .tabItem {
