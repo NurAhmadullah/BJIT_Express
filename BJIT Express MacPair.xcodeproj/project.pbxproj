@@ -85,6 +85,7 @@
 		89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		89ADF92C2A0BB2260075DFC1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89ADF92E2A0CB34B0075DFC1 /* BusLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLayoutView.swift; sourceTree = "<group>"; };
+		89C301672A1CC47300F730B4 /* BJIT-Express-MacPair-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BJIT-Express-MacPair-Info.plist"; sourceTree = SOURCE_ROOT; };
 		89F6AECD2A1798810088D2C1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +147,7 @@
 		89101CCE2A04C1E70064C993 /* BJIT Express MacPair */ = {
 			isa = PBXGroup;
 			children = (
+				89C301672A1CC47300F730B4 /* BJIT-Express-MacPair-Info.plist */,
 				89304E102A0A001600923508 /* BJIT Express MacPair.entitlements */,
 				89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */,
 				89922E9F2A1616DA00653588 /* CloudKitManager.swift */,
@@ -539,6 +541,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BJIT-Express-MacPair-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "BJIT Express";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide personalized content and services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -576,6 +579,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2BL4KQW6R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BJIT-Express-MacPair-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "BJIT Express";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide personalized content and services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

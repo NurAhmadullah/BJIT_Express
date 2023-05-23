@@ -18,6 +18,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     override init() {
         super.init()
         locationManager.delegate = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackgroundActive(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForegroundActive(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     func requestLocation() {
@@ -26,6 +30,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if CLLocationManager.locationServicesEnabled() {
                 self?.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
                 self?.locationManager.startUpdatingLocation()
+                self?.locationManager.allowsBackgroundLocationUpdates = true
+                self?.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             }
         }
     }
@@ -34,7 +40,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if let location = locations.last {
             latitude = location.coordinate.latitude //37.4074565
             longitude = location.coordinate.longitude //-122.21184
-            
+            print("location updates on background locationManager update \(latitude)")
+
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
                 if let placemark = placemarks?.first {
@@ -48,6 +55,16 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location manager error: \(error.localizedDescription)")
+    }
+    
+    @objc private func applicationDidEnterBackgroundActive (_ notification: Notification) {
+        print("location updates on background EnterBackgroundActive \(locationManager.location?.coordinate.latitude)")
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    @objc private func applicationWillEnterForegroundActive (_ notification: Notification) {
+        print("location updates on background WillEnterForegroundActive \(locationManager.location?.coordinate.latitude)")
+        self.locationManager.startUpdatingLocation()
     }
 }
 
