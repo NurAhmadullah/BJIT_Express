@@ -8,14 +8,8 @@
 import Foundation
 import CloudKit
 
-
-//var name: String
-//var employeeId: String
-//var isActive: Bool = false
-//var startTime: Date
-
+/*
 class CloudKitDefaults{
-    private let keyValueStore = NSUbiquitousKeyValueStore.default
     static let shared = CloudKitDefaults()
     let isInitialSetupDone = "isInitialSetupDone"
     private init(){}
@@ -27,7 +21,7 @@ class CloudKitDefaults{
         keyValueStore.bool(forKey: key)
     }
 }
-
+*/
 
 
 
@@ -50,6 +44,7 @@ class CloudKitManager: ObservableObject {
     @Published private var usersDictionary: [CKRecord.ID: UserModel] = [:]
     @Published private var busDictionary: [CKRecord.ID: BusModel] = [:]
     @Published private var seatsDictionary: [CKRecord.ID: SeatModel] = [:]
+    @Published private var keyValuesDictionary: [CKRecord.ID: KeyValueModel] = [:]
     
     var users: [UserModel] {
         usersDictionary.values.compactMap { $0 }
@@ -60,19 +55,28 @@ class CloudKitManager: ObservableObject {
     var buses: [BusModel] {
         busDictionary.values.compactMap { $0 }
     }
+    var keyValues: [KeyValueModel] {
+        keyValuesDictionary.values.compactMap { $0 }
+    }
+    var currentBusId = "1"
+    var currentBusSeats: [SeatModel] {
+        seats.filter{$0.busId == currentBusId}
+    }
     
+    var isSeatPopulated = false
     
+    /*
     func setupInitialBussesAndSeats() async{
         if !CloudKitDefaults.shared.getBooleanValue(key: CloudKitDefaults.shared.isInitialSetupDone){
             do{
                 try? await addBus(bus: BusModel(name: "BJIT Bus", busId: "1", startTime: Date()))
                 try? await addBus(bus: BusModel(name: "Gulshan Chaka", busId: "2", startTime: Date()))
                 try? await addBus(bus: BusModel(name: "Dhaka Chaka", busId: "3", startTime: Date()))
-                
+
                 var allSeatCnt = 0
                 for bus in self.buses{
                     for seatNumber in 1...50{
-                        try? await addSeat(seat: SeatModel(seatId: "\(allSeatCnt)", busId: bus.busId, seatNumber: seatNumber, bookedBy: "0"), busId: bus.busId)
+                        try? await addSeat(seat: SeatModel(seatId: "\(allSeatCnt)", busId: bus.busId, seatNumber: seatNumber, bookedBy: "0"))
                         allSeatCnt += 1
                     }
                 }
@@ -80,7 +84,46 @@ class CloudKitManager: ObservableObject {
         }
         CloudKitDefaults.shared.setBooleanValue(key: CloudKitDefaults.shared.isInitialSetupDone, boolValue: true)
     }
+    */
     
+    func populateKeyValue() async throws {
+
+        let query = CKQuery(recordType: KeyValueModelKeys.type.rawValue, predicate: NSPredicate(value: true))
+        query.sortDescriptors = [NSSortDescriptor(key: KeyValueModelKeys.sortKey.rawValue, ascending: false)]
+        let result = try await db.records(matching: query)
+        let records = result.matchResults.compactMap { try? $0.1.get() }
+
+        records.forEach { record in
+            keyValuesDictionary[record.recordID] = KeyValueModel(record: record)
+        }
+    }
+    
+    func setKeyValue(key: String, value: String) async throws {
+        if let keyVal = isKeyExists(key: key){
+            // update key value
+            return
+        }
+        else{
+            let keyValue = KeyValueModel(key: key, value: value, createdAt: Date())
+            let record = try await db.save(keyValue.record)
+            guard let keyValue = KeyValueModel(record: record) else { return }
+            keyValuesDictionary[keyValue.recordId!] = keyValue
+        }
+    }
+    private func isKeyExists(key:String)->KeyValueModel?{
+        let keyVal = keyValues.filter {
+            return $0.key == key
+        }
+        return keyVal.first
+    }
+
+//    func getKeyValue(key: String) async throws {
+//        let record = try await db.save(keyValue.record)
+//        guard let keyValue = KeyValueModel(record: record) else { return }
+//        keyValuesDictionary[keyValue.recordId!] = keyValue
+//    }
+
+
     func populateUsers() async throws {
         
         let query = CKQuery(recordType: UserModelKeys.type.rawValue, predicate: NSPredicate(value: true))
@@ -113,7 +156,7 @@ class CloudKitManager: ObservableObject {
         let records = result.matchResults.compactMap { try? $0.1.get() }
         
         records.forEach { record in
-            seatsDictionary[record.recordID] = SeatModel(record: record, busId: "1")
+            seatsDictionary[record.recordID] = SeatModel(record: record)
         }
     }
     
@@ -132,10 +175,10 @@ class CloudKitManager: ObservableObject {
         busDictionary[bus.recordId!] = bus
     }
     
-    func addSeat(seat: SeatModel, busId:String) async throws {
+    func addSeat(seat: SeatModel) async throws {
         let record = try await db.save(seat.record)
-        guard let seat = SeatModel(record: record, busId: busId) else { return }
-        
+        guard let seat = SeatModel(record: record) else { return }
+
         seatsDictionary[seat.recordId!] = seat
     }
     

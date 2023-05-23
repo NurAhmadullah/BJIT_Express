@@ -23,7 +23,7 @@ struct DetailsView: View {
             .padding(.horizontal, 10)
             
             if selection == 0 {
-                BusLayoutView(seatsReserved: seatsReserved, seatsFilled: seatsFilled)
+                BusLayoutView(seatsReserved: seatsReserved, seatsFilled: seatsFilled, busId: busid)
             } else {
                 PassengerListView(busid: busid)
             }

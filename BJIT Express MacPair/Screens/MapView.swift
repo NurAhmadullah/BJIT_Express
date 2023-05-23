@@ -109,7 +109,7 @@ struct Map: UIViewRepresentable {
             
             let distanceAnnotation = MKPointAnnotation()
             distanceAnnotation.title = estimatedArrivalTime
-            let index = route.polyline.pointCount/2
+            let index = route.polyline.pointCount - 1
             distanceAnnotation.coordinate = route.polyline.points()[index].coordinate
             
             mapView.addAnnotation(distanceAnnotation)

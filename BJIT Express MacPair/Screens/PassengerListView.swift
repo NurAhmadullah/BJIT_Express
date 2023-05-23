@@ -36,7 +36,7 @@ struct PassengerListView: View {
             }
         }.onAppear(perform: {
             Task{
-                try? await ckManager.populateSeats(busid: busid)
+                try? await ckManager.populateSeats()
             }
         })
         

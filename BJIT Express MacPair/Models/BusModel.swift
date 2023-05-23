@@ -9,7 +9,7 @@ import Foundation
 import CloudKit
 
 enum BusModelKeys: String {
-    case type = "CKUserModel"
+    case type = "CKBusModel"
     case sortKey = "busId"
 }
 
@@ -20,7 +20,7 @@ struct BusModel {
     var startTime: Date     // daily start time
     
     var record: CKRecord {
-        let record = CKRecord(recordType: UserModelKeys.type.rawValue)
+        let record = CKRecord(recordType: BusModelKeys.type.rawValue)
         record["name"] = name
         record["busId"] = busId
         record["startTime"] = startTime

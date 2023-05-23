@@ -35,11 +35,12 @@ struct SeatModel {
     }
 }
 
-extension SeatModel {
-    init?(record: CKRecord, busId:String) {
+extension SeatModel {    
+    init?(record: CKRecord) {
         
         guard let seatNumber = record["seatNumber"] as? Int,
               let seatId = record["seatId"] as? String,
+              let busId = record["busId"] as? String,
               let bookedBy = record["bookedBy"] as? String,
               let isReserved = record["isReserved"] as? Bool,
               let isFilled = record["isFilled"] as? Bool else {

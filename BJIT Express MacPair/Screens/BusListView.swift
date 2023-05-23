@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BusListView: View {
     @EnvironmentObject private var ckManager: CloudKitManager
-    let numbers = [1, 2, 3, 4, 5]
+//    let numbers = [1, 2, 3, 4, 5]
     @State var numberOfReserved = 30
     @State var numberOfFilled = 15
     var body: some View {
