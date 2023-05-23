@@ -11,6 +11,7 @@ struct DetailsView: View {
     @State private var selection = 0
     var seatsReserved: Int
     var seatsFilled: Int
+    var busid: String
     var body: some View {
         
         VStack() {
@@ -24,7 +25,7 @@ struct DetailsView: View {
             if selection == 0 {
                 BusLayoutView(seatsReserved: seatsReserved, seatsFilled: seatsFilled)
             } else {
-                PassengerListView()
+                PassengerListView(busid: busid)
             }
         }
     }
@@ -32,6 +33,6 @@ struct DetailsView: View {
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(seatsReserved: 20, seatsFilled: 10)
+        DetailsView(seatsReserved: 20, seatsFilled: 10, busid: "1")
     }
 }

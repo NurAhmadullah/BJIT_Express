@@ -150,10 +150,15 @@ struct Map: UIViewRepresentable {
 struct MapView: View {
    
     @StateObject private var locationProvider = LocationManager()
+    @AppStorage("employeeID") var savedEmployeeID: String = ""
+    @EnvironmentObject private var ckManager: CloudKitManager
+    @State private var errorWrapper: ErrorWrapper?
     @State private var selectedTransportType: MKDirectionsTransportType = .automobile
     @State private var eta: String = ""
     @State private var distance: String = ""
     @State private var canStart: Bool = false
+    @State private var showAlert = false
+    let hour = 10, minute = 5, second = 0
     var body: some View {
         VStack {
             
@@ -178,6 +183,19 @@ struct MapView: View {
                     .font(.system(size: 20, design: .rounded))
                     Button(action: {
                         //Start Button Action
+                        if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
+                            Task{
+                                do{
+//                                    await ckManager.setupInitialBussesAndSeats()
+                                    try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: true, startTime: Date()))
+                                }
+                                catch{
+                                    errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
+                                }
+                            }
+                        } else{
+                            showAlert = true
+                        }
                     }, label: {
                         HStack{
                             Image(systemName: "location.north")
@@ -186,8 +204,14 @@ struct MapView: View {
                         }.padding(.horizontal, 20)
                             .padding(.vertical, 10)
                             .foregroundColor(Color("startButtonTextColor"))
-                        
                     })
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Alert"),
+                            message: Text("There is not bus schedule at  this moment."),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
                     .background(Color("startButtonColor"))
                     .cornerRadius(20)
                     .buttonStyle(.borderless)
@@ -196,5 +220,28 @@ struct MapView: View {
                 .padding(.horizontal, 10)
             }
         }
+    }
+    
+    func isBeforeTimeOfDay(date: Date, hour: Int, minute: Int, second: Int) -> Bool {
+        let calendar = Calendar.current
+        let currentDate = Date()
+
+        // Extracting the components (year, month, day) from the current date
+        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+
+        // Creating a new date with the same year, month, and day, but with the specified time
+        var components = DateComponents()
+        components.year = currentComponents.year
+        components.month = currentComponents.month
+        components.day = currentComponents.day
+        components.hour = hour
+        components.minute = minute
+        components.second = second
+
+        if let specifiedTime = calendar.date(from: components) {
+            return date < specifiedTime
+        }
+
+        return false
     }
 }

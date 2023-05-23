@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BusListView: View {
+    @EnvironmentObject private var ckManager: CloudKitManager
     let numbers = [1, 2, 3, 4, 5]
     @State var numberOfReserved = 30
     @State var numberOfFilled = 15
@@ -18,14 +19,18 @@ struct BusListView: View {
                     .font(.headline)
                     .foregroundColor(.secondary)
                 
-                ForEach(numbers, id: \.self) { bus in //ForEach(buses, id: \.recordId) { bus in
-                    NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: bus))  {
-                        ListRowView(column1: "bus\(bus)", column2: "\(bus)", column3: "50", column4: getFormatedDate(date: Date()))                    }
+                ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
+                    NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: 10, busid: bus.busId))  {
+                        ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
                 }
             }
             .navigationTitle("Bus List")
             .navigationBarTitleDisplayMode(.inline)
-        }
+        }.onAppear(perform: {
+            Task{
+                try? await ckManager.populateBus()
+            }
+        })
     }
     func getFormatedDate(date: Date)->String{
         let dateFormatter = DateFormatter()

@@ -16,7 +16,7 @@ struct DataItem {
 struct PassengerListView: View {
     
     @EnvironmentObject private var ckManager: CloudKitManager
-    
+    var busid: String
     
     var body: some View {
         
@@ -26,15 +26,17 @@ struct PassengerListView: View {
                     .font(.headline)
                     .foregroundColor(.secondary)
                 
-                ForEach(ckManager.users, id: \.recordId) { item in
-                    HStack {
-                        ListRowView(column1: item.employeeId, column2: getFormatedDate(date: item.startTime), column3: nil, column4: item.isActive ? "Active" : "Inactive")
+                ForEach(ckManager.seats, id: \.recordId) { seat in
+                    if seat.busId == busid{
+                        HStack {
+                            ListRowView(column1: seat.bookedBy, column2: getFormatedDate(date: Date()), column3: nil, column4: seat.isFilled ? "Active" : "Inactive")
+                        }
                     }
                 }
             }
         }.onAppear(perform: {
             Task{
-                try? await ckManager.populateUsers()
+                try? await ckManager.populateSeats(busid: busid)
             }
         })
         
@@ -57,6 +59,6 @@ struct PassengerListView: View {
 
 struct PassengerListView_Previews: PreviewProvider {
     static var previews: some View {
-        PassengerListView()
+        PassengerListView(busid: "1")
     }
 }
