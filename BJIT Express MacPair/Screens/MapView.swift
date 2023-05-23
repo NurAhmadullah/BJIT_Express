@@ -38,10 +38,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            latitude = location.coordinate.latitude //37.4074565
-            longitude = location.coordinate.longitude //-122.21184
-            print("location updates on background locationManager update \(latitude)")
-
+            latitude = location.coordinate.latitude
+            longitude = location.coordinate.longitude
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
                 if let placemark = placemarks?.first {
@@ -175,6 +173,8 @@ struct MapView: View {
     @State private var distance: String = ""
     @State private var canStart: Bool = false
     @State private var showAlert = false
+    var fakeRoute = DemoLocation().getRoute()
+    @State var routeIndex = 0
     let hour = 10, minute = 5, second = 0
     var body: some View {
         VStack {
@@ -182,12 +182,13 @@ struct MapView: View {
             VStack {
                 MapTopView()
                 VehicleSelectionView(selectedVehicle: $selectedTransportType)
-                
-                Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: 37.4253688 , longitude: -122.1464785), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance, canStart: $canStart)
-                    .cornerRadius(10)
-                    .onAppear {
-                        locationProvider.requestLocation()
-                    }
+                if routeIndex < fakeRoute.count{
+                    Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: fakeRoute[routeIndex].coordinate.latitude, longitude: fakeRoute[routeIndex].coordinate.longitude), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance, canStart: $canStart)
+                        .cornerRadius(10)
+                        .onAppear {
+                            locationProvider.requestLocation()
+                        }
+                }
                 VStack(alignment: .leading){
                     Rectangle()
                         .frame(height: 0)
@@ -198,41 +199,59 @@ struct MapView: View {
                             .foregroundColor(.gray)
                     }
                     .font(.system(size: 20, design: .rounded))
-                    Button(action: {
-                        //Start Button Action
-                        if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
-                            Task{
-                                do{
-//                                    await ckManager.setupInitialBussesAndSeats()
-                                    try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: true, startTime: Date()))
+                    HStack {
+                        Button(action: {
+                            //Start Button Action
+                            if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
+                                Task{
+                                    do{
+                                        try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: true, startTime: Date()))
+                                    }
+                                    catch{
+                                        errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
+                                    }
                                 }
-                                catch{
-                                    errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
-                                }
+                            } else{
+                                showAlert = true
                             }
-                        } else{
-                            showAlert = true
+                        }, label: {
+                            HStack{
+                                Image(systemName: "location.north")
+                                Text("Start")
+                                
+                            }.padding(.horizontal, 20)
+                                .padding(.vertical, 10)
+                                .foregroundColor(Color("startButtonTextColor"))
+                        })
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Alert"),
+                                message: Text("There is not bus schedule at  this moment."),
+                                dismissButton: .default(Text("OK"))
+                            )
                         }
-                    }, label: {
-                        HStack{
-                            Image(systemName: "location.north")
-                            Text("Start")
-                            
-                        }.padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .foregroundColor(Color("startButtonTextColor"))
-                    })
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Alert"),
-                            message: Text("There is not bus schedule at  this moment."),
-                            dismissButton: .default(Text("OK"))
-                        )
+                        .background(Color("startButtonColor"))
+                        .cornerRadius(20)
+                        .buttonStyle(.borderless)
+                        .disabled(!canStart)
+                        Spacer()
+                        Button(action: {
+                            if routeIndex < fakeRoute.count{
+                                routeIndex = routeIndex + 1
+                            }
+                        }, label: {
+                            Text("Next")
+                        })
+                        .hidden()
+                        Button(action: {
+                            if routeIndex > 1{
+                                routeIndex = routeIndex - 1
+                            }
+                        }, label: {
+                            Text("Previous")
+                        })
+                        .hidden()
                     }
-                    .background(Color("startButtonColor"))
-                    .cornerRadius(20)
-                    .buttonStyle(.borderless)
-                    .disabled(!canStart)
                 }
                 .padding(.horizontal, 10)
             }
