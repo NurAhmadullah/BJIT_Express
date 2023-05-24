@@ -9,7 +9,9 @@ import SwiftUI
 
 struct BusListView: View {
     @EnvironmentObject private var ckManager: CloudKitManager
+    @EnvironmentObject private var homeViewModel: HomeViewModel
 //    let numbers = [1, 2, 3, 4, 5]
+    @AppStorage("employeeID") var savedEmployeeID: String = ""
     @State var numberOfReserved = 30
     @State var numberOfFilled = 15
     var body: some View {
@@ -28,7 +30,7 @@ struct BusListView: View {
             .navigationBarTitleDisplayMode(.inline)
         }.onAppear(perform: {
             Task{
-                try? await ckManager.populateBus()
+                try? await allocateBus()
             }
         })
     }
@@ -38,6 +40,27 @@ struct BusListView: View {
         
         let dateString = dateFormatter.string(from: date)
         return dateString
+    }
+    
+    func allocateBus() async{
+        var reserveDone = false
+        for bus in ckManager.buses{
+            let busDepartureDuration = abs(Int(Date().timeIntervalSince(bus.startTime)))
+            if homeViewModel.durationInSecond < busDepartureDuration{
+                // allocate to empty seat
+                let isReserved = try? await ckManager.allocateSeat(busId: bus.busId, employeeId: savedEmployeeID)
+                if isReserved == true{
+                    reserveDone = true
+                    break
+                }
+                else{
+                    print("no seat in the bus: \(bus.name) of id: \(bus.busId), trying next bus")
+                }
+            }
+        }
+        if reserveDone == false{
+            print("oops! no seat available on any bus")
+        }
     }
 }
 

@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import Combine
 
-class HomeViewModel{
+class HomeViewModel:ObservableObject{
+    @Published var checkedInTime = Date()
+    @Published var durationInSecond:Int = 0
+    @Published var distanceInMeter:Int = 0
     
     init() {
         

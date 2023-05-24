@@ -59,12 +59,10 @@ class CloudKitManager: ObservableObject {
         keyValuesDictionary.values.compactMap { $0 }
     }
     var currentBusId = "1"
-    var currentBusSeats: [SeatModel] {
+    var currentBusSeats: [SeatModel] {          // used on bus detail-view
         seats.filter{$0.busId == currentBusId}
     }
-    
-    var isSeatPopulated = false
-    
+
     /*
     func setupInitialBussesAndSeats() async{
         if !CloudKitDefaults.shared.getBooleanValue(key: CloudKitDefaults.shared.isInitialSetupDone){
@@ -76,7 +74,7 @@ class CloudKitManager: ObservableObject {
                 var allSeatCnt = 0
                 for bus in self.buses{
                     for seatNumber in 1...50{
-                        try? await addSeat(seat: SeatModel(seatId: "\(allSeatCnt)", busId: bus.busId, seatNumber: seatNumber, bookedBy: "0"))
+                        try? await addSeat(seat: SeatModel(seatId: "\(allSeatCnt)", busId: bus.busId, seatNumber: seatNumber, bookedBy: ""))
                         allSeatCnt += 1
                     }
                 }
@@ -242,8 +240,103 @@ class CloudKitManager: ObservableObject {
             usersDictionary[editedUser.recordId!] = editedUser
         }
     }
+    
+    
+    func setBusStartTime(editedBus:BusModel,startTime:Date) async {
+        
+//        print("bus schedule test: setBusStartTime")
+        busDictionary[editedBus.recordId!]?.startTime = startTime
+        do {
+            let record = try await db.record(for: editedBus.recordId!)
+            record["startTime"] = startTime
+            
+            try await db.save(record)
+        } catch {
+            busDictionary[editedBus.recordId!] = editedBus
+        }
+    }
 
     
+    func reserveSeat(editedSeat: SeatModel,EmployeeId:String) async {
+        
+//        print("reserve test: reserveSeat")
+        seatsDictionary[editedSeat.recordId!]?.isReserved = true
+        seatsDictionary[editedSeat.recordId!]?.isFilled = false
+        seatsDictionary[editedSeat.recordId!]?.bookedBy = EmployeeId
+        do {
+            let record = try await db.record(for: editedSeat.recordId!)
+            record["isReserved"] = true
+            record["isFilled"] = false
+            record["bookedBy"] = EmployeeId
+            
+            try await db.save(record)
+        } catch {
+            seatsDictionary[editedSeat.recordId!] = editedSeat
+        }
+    }
     
+    func bookSeat(editedSeat: SeatModel) async {
+        
+//        print("reserve test: bookSeat")
+        seatsDictionary[editedSeat.recordId!]?.isFilled = true
+        do {
+            let record = try await db.record(for: editedSeat.recordId!)
+            record["isFilled"] = true
+            
+            try await db.save(record)
+        } catch {
+            seatsDictionary[editedSeat.recordId!] = editedSeat
+        }
+    }
+    
+    
+    func getSeatsByBusId(busId: String)->[SeatModel]{
+        
+//        print("reserve test: getSeatsByBusId")
+        return seats.filter{$0.busId == busId}
+    }
+    
+    func isSeatReserved(employeeId:String)->SeatModel?{
+        return seats.filter{$0.bookedBy == employeeId}.first
+    }
+    
+    // reserve seat for
+    func allocateSeat(busId: String, employeeId:String) async -> Bool{
+        
+//        print("reserve test: allocateSeat")
+        if isSeatReserved(employeeId: employeeId) != nil{
+            return true
+        }
+        var seatInBus = getSeatsByBusId(busId: busId)
+        for seat in seatInBus{
+            if seat.isReserved == false{
+                do{
+                    try? await reserveSeat(editedSeat: seat, EmployeeId: employeeId)
+                }
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    // free up the seat from its user
+    func deallocateSeat(editedSeat: SeatModel) async {
+        
+//        print("reserve test: deallocateSeat")
+        seatsDictionary[editedSeat.recordId!]?.isReserved = false
+        seatsDictionary[editedSeat.recordId!]?.isFilled = false
+        seatsDictionary[editedSeat.recordId!]?.bookedBy = ""
+        do {
+            let record = try await db.record(for: editedSeat.recordId!)
+            record["isReserved"] = false
+            record["isFilled"] = false
+            record["bookedBy"] = false
+            
+            try await db.save(record)
+        } catch {
+            seatsDictionary[editedSeat.recordId!] = editedSeat
+        }
+    }
     
 }

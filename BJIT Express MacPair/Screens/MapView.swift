@@ -78,6 +78,8 @@ struct Map: UIViewRepresentable {
     @Binding var estimatedArrivalTime: String
     @Binding var distance: String
     @Binding var canStart: Bool
+    @Binding var distanceInMeter: Int
+    @Binding var durationInSecond: Int
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -108,6 +110,8 @@ struct Map: UIViewRepresentable {
                 estimatedArrivalTime = "No Routes found."
                 distance = ""
                 canStart = false
+                durationInSecond = 0
+                distanceInMeter = 0
                 return
             }
             mapView.addOverlay(route.polyline)
@@ -121,6 +125,8 @@ struct Map: UIViewRepresentable {
             
             let distanceInKm = route.distance / 1000 // Convert distance to kilometers
             distance = String(format: "%.2f km", distanceInKm)
+            distanceInMeter = Int(route.distance)
+            durationInSecond = Int(route.expectedTravelTime)
             
             let distanceAnnotation = MKPointAnnotation()
             distanceAnnotation.title = estimatedArrivalTime
@@ -167,6 +173,7 @@ struct MapView: View {
     @StateObject private var locationProvider = LocationManager()
     @AppStorage("employeeID") var savedEmployeeID: String = ""
     @EnvironmentObject private var ckManager: CloudKitManager
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     @State private var errorWrapper: ErrorWrapper?
     @State private var selectedTransportType: MKDirectionsTransportType = .automobile
     @State private var eta: String = ""
@@ -175,6 +182,8 @@ struct MapView: View {
     @State private var showAlert = false
     var fakeRoute = DemoLocation().getRoute()
     @State var routeIndex = 0
+    @State private var durationInSecond = 0
+    @State private var distanceInMeter = 0
     let hour = 10, minute = 5, second = 0
     var body: some View {
         VStack {
@@ -183,10 +192,17 @@ struct MapView: View {
                 MapTopView()
                 VehicleSelectionView(selectedVehicle: $selectedTransportType)
                 if routeIndex < fakeRoute.count{
-                    Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: fakeRoute[routeIndex].coordinate.latitude, longitude: fakeRoute[routeIndex].coordinate.longitude), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance, canStart: $canStart)
+                    Map(sourceLocation: CLLocationCoordinate2D(latitude: locationProvider.latitude, longitude: locationProvider.longitude), destinationLocation: CLLocationCoordinate2D(latitude: fakeRoute[routeIndex].coordinate.latitude , longitude: fakeRoute[routeIndex].coordinate.longitude), selectedTransportType: $selectedTransportType, estimatedArrivalTime: $eta, distance: $distance, canStart: $canStart,distanceInMeter: $distanceInMeter, durationInSecond: $durationInSecond)
                         .cornerRadius(10)
                         .onAppear {
                             locationProvider.requestLocation()
+                        }
+                        .onChange(of: durationInSecond) { newValue in
+                            print("duration in seconds: \(newValue)")
+                            homeViewModel.durationInSecond = newValue
+                        }
+                        .onChange(of: distanceInMeter) { newValue in
+                            homeViewModel.distanceInMeter = newValue
                         }
                 }
                 VStack(alignment: .leading){
@@ -235,14 +251,7 @@ struct MapView: View {
                         .buttonStyle(.borderless)
                         .disabled(!canStart)
                         Spacer()
-                        Button(action: {
-                            if routeIndex < fakeRoute.count{
-                                routeIndex = routeIndex + 1
-                            }
-                        }, label: {
-                            Text("Next")
-                        })
-                        .hidden()
+                        
                         Button(action: {
                             if routeIndex > 1{
                                 routeIndex = routeIndex - 1
@@ -250,7 +259,15 @@ struct MapView: View {
                         }, label: {
                             Text("Previous")
                         })
-                        .hidden()
+//                        .hidden()
+                        Button(action: {
+                            if routeIndex < fakeRoute.count{
+                                routeIndex = routeIndex + 1
+                            }
+                        }, label: {
+                            Text("Next")
+                        })
+//                        .hidden()
                     }
                 }
                 .padding(.horizontal, 10)
