@@ -96,24 +96,23 @@ struct BusLayoutView: View {
                 Spacer()
             }
         }
-        .onAppear(){
-            Task{
-                try? await ckManager.currentBusId = busId
-                try? await ckManager.populateSeats()
-            }
-        }
+//        .onAppear(){
+//            Task{
+//                ckManager.currentBusId = busId
+//                try? await ckManager.populateSeats(busId: busId)
+//            }
+//        }
     }
     func getSeatColor(seatIndex: Int)->Color{
-        if ckManager.currentBusSeats[seatIndex].isFilled{
-            return .red
-        }
-        else if ckManager.currentBusSeats[seatIndex].isReserved{
-            return .gray
-        }
-        else{
-            return .green
-        }
-        /*
+//        if ckManager.currentBusSeats[seatIndex].isFilled{
+//            return .red
+//        }
+//        else if ckManager.currentBusSeats[seatIndex].isReserved{
+//            return .gray
+//        }
+//        else{
+//            return .green
+//        }
         if seatIndex < seatsFilled{
             return .red
         } else if seatIndex < seatsReserved{
@@ -121,7 +120,6 @@ struct BusLayoutView: View {
         } else{
             return .green
         }
-        */
     }
 }
 

@@ -34,11 +34,7 @@ struct PassengerListView: View {
                     }
                 }
             }
-        }.onAppear(perform: {
-            Task{
-                try? await ckManager.populateSeats()
-            }
-        })
+        }
         
     }
     func formatTimeInterval(_ timeInterval: TimeInterval) -> String {

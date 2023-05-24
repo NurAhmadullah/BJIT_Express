@@ -146,9 +146,9 @@ class CloudKitManager: ObservableObject {
         }
     }
     
-    func populateSeats() async throws {
+    func populateSeats(busId: String) async throws {
         
-        let query = CKQuery(recordType: SeatModelKeys.type.rawValue, predicate: NSPredicate(value: true))
+        let query = CKQuery(recordType: SeatModelKeys.type.rawValue, predicate: NSPredicate(format: "busId == %@", busId))
         query.sortDescriptors = [NSSortDescriptor(key: SeatModelKeys.sortKey.rawValue, ascending: false)]
         let result = try await db.records(matching: query)
         let records = result.matchResults.compactMap { try? $0.1.get() }
@@ -307,11 +307,11 @@ class CloudKitManager: ObservableObject {
         if isSeatReserved(employeeId: employeeId) != nil{
             return true
         }
-        var seatInBus = getSeatsByBusId(busId: busId)
+        let seatInBus = getSeatsByBusId(busId: busId)
         for seat in seatInBus{
             if seat.isReserved == false{
                 do{
-                    try? await reserveSeat(editedSeat: seat, EmployeeId: employeeId)
+                    await reserveSeat(editedSeat: seat, EmployeeId: employeeId)
                 }
                 return true
             }

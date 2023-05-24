@@ -20,13 +20,12 @@ struct ContentView: View {
             }
         }
         .onAppear(){
-            print("hello")
             Task{
                 try? await ckManager.populateBus()
-                try? await ckManager.populateSeats()
                 try? await ckManager.populateUsers()
                 for (idx,bus) in ckManager.buses.enumerated(){
-                    try? await ckManager.setBusStartTime(editedBus: bus, startTime: Date().addingTimeInterval(TimeInterval(3600 + (idx * 5 * 60))))
+                    await ckManager.setBusStartTime(editedBus: bus, startTime: Date().addingTimeInterval(TimeInterval(3600 + (idx * 5 * 60))))
+                    try? await ckManager.populateSeats(busId: bus.busId)
                 }
             }
         }

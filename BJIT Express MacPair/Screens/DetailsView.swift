@@ -9,8 +9,9 @@ import SwiftUI
 
 struct DetailsView: View {
     @State private var selection = 0
-    var seatsReserved: Int
-    var seatsFilled: Int
+    @EnvironmentObject private var ckManager: CloudKitManager
+    @State var seatsReserved: Int = 0
+    @State var seatsFilled: Int = 0
     var busid: String
     var body: some View {
         
@@ -26,6 +27,14 @@ struct DetailsView: View {
                 BusLayoutView(seatsReserved: seatsReserved, seatsFilled: seatsFilled, busId: busid)
             } else {
                 PassengerListView(busid: busid)
+            }
+        }
+        .onAppear(){
+            Task{
+                ckManager.currentBusId = busid
+                try? await ckManager.populateSeats(busId: busid)
+                seatsFilled = ckManager.currentBusSeats.filter{$0.isFilled}.count
+                seatsReserved = ckManager.currentBusSeats.filter{$0.isReserved}.count
             }
         }
     }

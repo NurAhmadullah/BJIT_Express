@@ -22,7 +22,7 @@ struct BusListView: View {
                     .foregroundColor(.secondary)
                 
                 ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
-                    NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: 10, busid: bus.busId))  {
+                    NavigationLink(destination: DetailsView(busid: bus.busId))  {
                         ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
                 }
             }
@@ -30,8 +30,7 @@ struct BusListView: View {
             .navigationBarTitleDisplayMode(.inline)
         }.onAppear(perform: {
             Task{
-                try? await allocateBus()
-            }
+                await allocateBus()            }
         })
     }
     func getFormatedDate(date: Date)->String{
