@@ -23,9 +23,13 @@ struct ContentView: View {
             Task{
                 try? await ckManager.populateBus()
                 try? await ckManager.populateUsers()
-                for (idx,bus) in ckManager.buses.enumerated(){
-                    await ckManager.setBusStartTime(editedBus: bus, startTime: Date().addingTimeInterval(TimeInterval(3600 + (idx * 5 * 60))))
+                var busStartTime = Calendar.current.startOfDay(for: Date())
+                    .addingTimeInterval(TimeInterval(3600 * 7))
+                    .addingTimeInterval(TimeInterval(60 * 30))
+                for bus in ckManager.buses{
+                    await ckManager.setBusStartTime(editedBus: bus, startTime: busStartTime)
                     try? await ckManager.populateSeats(busId: bus.busId)
+                    busStartTime = busStartTime.addingTimeInterval(TimeInterval(60 * 10))
                 }
             }
         }

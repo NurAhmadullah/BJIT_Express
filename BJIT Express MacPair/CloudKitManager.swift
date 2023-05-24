@@ -47,13 +47,13 @@ class CloudKitManager: ObservableObject {
     @Published private var keyValuesDictionary: [CKRecord.ID: KeyValueModel] = [:]
     
     var users: [UserModel] {
-        usersDictionary.values.compactMap { $0 }
+        usersDictionary.values.compactMap { $0 }.sorted{$0.employeeId < $1.employeeId}
     }
     var seats: [SeatModel] {
-        seatsDictionary.values.compactMap { $0 }
+        seatsDictionary.values.compactMap { $0 }.sorted{$0.busId < $1.busId}
     }
     var buses: [BusModel] {
-        busDictionary.values.compactMap { $0 }
+        busDictionary.values.compactMap { $0 }.sorted{$0.busId < $1.busId}
     }
     var keyValues: [KeyValueModel] {
         keyValuesDictionary.values.compactMap { $0 }
