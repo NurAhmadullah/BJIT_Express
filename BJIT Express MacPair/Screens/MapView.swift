@@ -185,6 +185,8 @@ struct MapView: View {
     @State private var durationInSecond = 0
     @State private var distanceInMeter = 0
     let hour = 10, minute = 5, second = 0
+    @State var hasStarted = false
+    @State var busName = ""
     var body: some View {
         VStack {
             
@@ -218,22 +220,25 @@ struct MapView: View {
                     HStack {
                         Button(action: {
                             //Start Button Action
-                            if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
+//                            if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
                                 Task{
                                     do{
                                         try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: true, startTime: Date()))
+                                        let isReserveDone = await allocateBus()
+                                        if isReserveDone{
+                                            hasStarted = true
+                                        }
+                                        
+                                            showAlert = true
                                     }
                                     catch{
                                         errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
                                     }
                                 }
-                            } else{
-                                showAlert = true
-                            }
                         }, label: {
                             HStack{
                                 Image(systemName: "location.north")
-                                Text("Start")
+                                Text(!hasStarted ? "Check-In" : "Check-Out")
                                 
                             }.padding(.horizontal, 20)
                                 .padding(.vertical, 10)
@@ -242,7 +247,7 @@ struct MapView: View {
                         .alert(isPresented: $showAlert) {
                             Alert(
                                 title: Text("Alert"),
-                                message: Text("There is not bus schedule at  this moment."),
+                                message: Text(busName.isEmpty ? "There is not bus schedule at  this moment." : "Your bus is \(busName)"),
                                 dismissButton: .default(Text("OK"))
                             )
                         }
@@ -275,26 +280,35 @@ struct MapView: View {
         }
     }
     
-    func isBeforeTimeOfDay(date: Date, hour: Int, minute: Int, second: Int) -> Bool {
-        let calendar = Calendar.current
-        let currentDate = Date()
-
-        // Extracting the components (year, month, day) from the current date
-        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
-
-        // Creating a new date with the same year, month, and day, but with the specified time
-        var components = DateComponents()
-        components.year = currentComponents.year
-        components.month = currentComponents.month
-        components.day = currentComponents.day
-        components.hour = hour
-        components.minute = minute
-        components.second = second
-
-        if let specifiedTime = calendar.date(from: components) {
-            return date < specifiedTime
+    func allocateBus()async ->Bool {
+        var reserveDone = false
+        for bus in ckManager.buses{
+            let busDepartureDuration = Int(bus.startTime.timeIntervalSince(Date()))
+            if let reservedSeat = ckManager.isSeatReserved(employeeId: savedEmployeeID){
+                await ckManager.deallocateSeat(editedSeat: reservedSeat)
+                try? await ckManager.populateSeats(busId: bus.busId)
+            }
+            if homeViewModel.durationInSecond < busDepartureDuration{
+                // allocate to empty seat
+                let isReserved = try? await ckManager.allocateSeat(busId: bus.busId, employeeId: savedEmployeeID, distanceInMeter: homeViewModel.distanceInMeter)
+                
+                try? await ckManager.populateSeats(busId: bus.busId)
+                if isReserved == true{
+                    busName = bus.name
+                    reserveDone = true
+                    break
+                }
+                else{
+                    busName = ""
+                    print("no seat in the bus: \(bus.name) of id: \(bus.busId), trying next bus")
+                }
+            }
         }
-
-        return false
+        if reserveDone == false{
+            busName = ""
+            print("oops! no seat available on any bus")
+        }
+        return reserveDone
     }
+    
 }

@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-struct Seat: Identifiable {
-    let id = UUID()
-    var available: Bool
-}
-
 struct BusLayoutView: View {
     @EnvironmentObject private var ckManager: CloudKitManager
     let seatsPerRow = 4
@@ -74,10 +69,6 @@ struct BusLayoutView: View {
                                             .foregroundColor(.white)
                                             .frame(width: 65, height: 65)
                                             .background(
-                                                //                                            Image("bus-seat-top-view")
-                                                //                                                .renderingMode(.template)
-                                                //                                                .resizable()
-                                                //                                                .aspectRatio(contentMode: .fit)
                                                 Rectangle()
                                                     .foregroundColor(getSeatColor(seatIndex: seatIndex))
                                                     .cornerRadius(10)
@@ -125,6 +116,6 @@ struct BusLayoutView: View {
 
 struct BusLayoutView_Previews: PreviewProvider {
     static var previews: some View {
-        BusLayoutView(seatsReserved: 20, seatsFilled: 10, busId: "1")
+        BusLayoutView(seatsReserved: 0, seatsFilled: 0, busId: "1")
     }
 }

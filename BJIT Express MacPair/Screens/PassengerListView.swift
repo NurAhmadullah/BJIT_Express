@@ -22,14 +22,14 @@ struct PassengerListView: View {
         
         List{
             Section {
-                ListRowView(column1: "Employee ID", column2: "Remaining time", column3: nil, column4: "Status")
+                ListRowView(column1: "Employee ID", column2: nil, column3: nil, column4: "Status")
                     .font(.headline)
                     .foregroundColor(.secondary)
                 
-                ForEach(ckManager.seats, id: \.recordId) { seat in
-                    if seat.busId == busid{
+                ForEach(ckManager.currentBusSeats, id: \.recordId) { seat in
+                    if !seat.bookedBy.isEmpty{
                         HStack {
-                            ListRowView(column1: seat.bookedBy, column2: getFormatedDate(date: Date()), column3: nil, column4: seat.isFilled ? "Active" : "Inactive")
+                            ListRowView(column1: seat.bookedBy, column2: nil, column3: nil, column4: seat.isFilled ? "Onboard" : "On the way")
                         }
                     }
                 }

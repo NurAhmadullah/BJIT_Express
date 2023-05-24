@@ -70,6 +70,8 @@ class CloudKitManager: ObservableObject {
                 try? await addBus(bus: BusModel(name: "BJIT Bus", busId: "1", startTime: Date()))
                 try? await addBus(bus: BusModel(name: "Gulshan Chaka", busId: "2", startTime: Date()))
                 try? await addBus(bus: BusModel(name: "Dhaka Chaka", busId: "3", startTime: Date()))
+                try? await addBus(bus: BusModel(name: "Green Chaka", busId: "4", startTime: Date()))
+                try? await addBus(bus: BusModel(name: "Green Dhaka", busId: "5", startTime: Date()))
 
                 var allSeatCnt = 0
                 for bus in self.buses{

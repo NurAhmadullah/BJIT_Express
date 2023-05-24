@@ -9,15 +9,17 @@ import SwiftUI
 
 struct ListRowView: View {
     let column1: String
-    let column2: String
+    let column2: String?
     let column3: String?
     let column4: String
     var body: some View {
         HStack {
             Text(column1)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(column2)
-                .frame(maxWidth: .infinity)
+            if let column2 = column2{
+                Text(column2)
+                    .frame(maxWidth: .infinity)
+            }
             if let column3 = column3{
                 Text(column3)
                     .frame(maxWidth: .infinity)

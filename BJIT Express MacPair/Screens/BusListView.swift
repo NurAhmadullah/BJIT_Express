@@ -27,24 +27,31 @@ struct BusListView: View {
 //                        ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
 //=======
                 List{
-                    ListRowView(column1: "Bus", column2: "Seats Booked", column3: "Number of seats", column4: "Departure time")
+                    ListRowView(column1: "Bus", column2: "Seats Reserved", column3: "Seats Booked", column4: "Departure time")
                         .font(.headline)
                         .foregroundColor(.secondary)
                     
                     ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
-                        NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: 10, busid: bus.busId))  {
-                            ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
+                        NavigationLink(destination: DetailsView(busid: bus.busId))  {
+                            ListRowView(column1: bus.name, column2: getNumberOfFilled(busId: bus.busId), column3: getNumberOfReserved(busId: bus.busId), column4: getFormatedDate(date: bus.startTime))                    }
                     }
-//>>>>>>> Stashed changes
                 }
                 .navigationTitle("Bus List")
                 .navigationBarTitleDisplayMode(.inline)
             }
-        }.onAppear(perform: {
-            Task{
-                await allocateBus()
-            }
-        })
+        }
+    }
+    
+    func getNumberOfFilled(busId: String)->String{
+        return String(ckManager.getSeatsByBusId(busId: busId).filter{$0.isFilled}.count)
+    }
+    
+    func getNumberOfReserved(busId: String)->String{
+        var numberofReserved = ckManager.getSeatsByBusId(busId: busId).filter{$0.isFilled}.count - ckManager.getSeatsByBusId(busId: busId).filter{$0.isReserved}.count
+        if numberofReserved < 0{
+            numberofReserved = 0
+        }
+        return String(numberofReserved)
     }
     func getFormatedDate(date: Date)->String{
         let dateFormatter = DateFormatter()
@@ -54,32 +61,7 @@ struct BusListView: View {
         return dateString
     }
     
-    func allocateBus() async{
-        var reserveDone = false
-        for bus in ckManager.buses{
-            let busDepartureDuration = abs(Int(Date().timeIntervalSince(bus.startTime)))
-            if let reservedSeat = ckManager.isSeatReserved(employeeId: savedEmployeeID){
-                await ckManager.deallocateSeat(editedSeat: reservedSeat)
-                try? await ckManager.populateSeats(busId: bus.busId)
-            }
-            if homeViewModel.durationInSecond < busDepartureDuration{
-                // allocate to empty seat
-                let isReserved = try? await ckManager.allocateSeat(busId: bus.busId, employeeId: savedEmployeeID, distanceInMeter: homeViewModel.distanceInMeter)
-                try? await ckManager.populateSeats(busId: bus.busId)
-                if isReserved == true{
-                    reserveDone = true
-                    break
-                }
-                else{
-                    print("no seat in the bus: \(bus.name) of id: \(bus.busId), trying next bus")
-                }
-            }
-        }
-        if reserveDone == false{
-            print("oops! no seat available on any bus")
-        }
-        
-    }
+
 }
 
 struct BusListView_Previews: PreviewProvider {

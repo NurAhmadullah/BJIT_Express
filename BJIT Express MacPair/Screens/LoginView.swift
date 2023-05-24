@@ -91,6 +91,7 @@ struct LoginView: View {
                 }
             }.onAppear(perform: {
                 Task{
+                    try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: false, startTime: Date()))
                     try? await ckManager.populateUsers()
                 }
                 

@@ -42,6 +42,6 @@ struct DetailsView: View {
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(seatsReserved: 20, seatsFilled: 10, busid: "1")
+        DetailsView(seatsReserved: 0, seatsFilled: 0, busid: "1")
     }
 }
