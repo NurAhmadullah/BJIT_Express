@@ -222,17 +222,22 @@ struct MapView: View {
                             //Start Button Action
 //                            if isBeforeTimeOfDay(date: Date(), hour: hour, minute: minute, second: second) {
                                 Task{
-                                    do{
-                                        try await ckManager.addUser(user: UserModel(name: "User", employeeId: savedEmployeeID, isActive: true, startTime: Date()))
+                                    if !hasStarted{
+                                        //checkin
                                         let isReserveDone = await allocateBus()
                                         if isReserveDone{
                                             hasStarted = true
+                                        } else{
+                                            hasStarted = false
                                         }
-                                        
-                                            showAlert = true
-                                    }
-                                    catch{
-                                        errorWrapper = ErrorWrapper(error: error, guidance: "Failed to update task. Try again later.")
+                                        showAlert = true
+                                    } else{
+                                        //checkout
+                                        showAlert = false
+                                        hasStarted = false
+                                        if let reservedSeat = ckManager.isSeatReserved(employeeId: savedEmployeeID){
+                                            await ckManager.deallocateSeat(editedSeat: reservedSeat)
+                                        }
                                     }
                                 }
                         }, label: {
@@ -261,6 +266,9 @@ struct MapView: View {
                             if routeIndex > 1{
                                 routeIndex = routeIndex - 1
                             }
+                            Task{
+                                await allocateBus()
+                            }
                         }, label: {
                             Text("Previous")
                         })
@@ -268,6 +276,9 @@ struct MapView: View {
                         Button(action: {
                             if routeIndex < fakeRoute.count{
                                 routeIndex = routeIndex + 1
+                            }
+                            Task{
+                                await allocateBus()
                             }
                         }, label: {
                             Text("Next")
