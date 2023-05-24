@@ -16,21 +16,34 @@ struct BusListView: View {
     @State var numberOfFilled = 15
     var body: some View {
         NavigationView {
-            List{
-                ListRowView(column1: "Bus", column2: "Seats Booked", column3: "Number of seats", column4: "Departure time")
+            VStack{
+                Text("Employee Id: \(savedEmployeeID)")
                     .font(.headline)
-                    .foregroundColor(.secondary)
-                
-                ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
-                    NavigationLink(destination: DetailsView(busid: bus.busId))  {
-                        ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
+//<<<<<<< Updated upstream
+//                    .foregroundColor(.secondary)
+//
+//                ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
+//                    NavigationLink(destination: DetailsView(busid: bus.busId))  {
+//                        ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
+//=======
+                List{
+                    ListRowView(column1: "Bus", column2: "Seats Booked", column3: "Number of seats", column4: "Departure time")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                    
+                    ForEach(ckManager.buses, id: \.recordId) { bus in //ForEach(buses, id: \.recordId) { bus in
+                        NavigationLink(destination: DetailsView(seatsReserved: numberOfReserved, seatsFilled: 10, busid: bus.busId))  {
+                            ListRowView(column1: bus.name, column2: "\(bus.busId)", column3: "50", column4: getFormatedDate(date: bus.startTime))                    }
+                    }
+//>>>>>>> Stashed changes
                 }
+                .navigationTitle("Bus List")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("Bus List")
-            .navigationBarTitleDisplayMode(.inline)
         }.onAppear(perform: {
             Task{
-                await allocateBus()            }
+                await allocateBus()
+            }
         })
     }
     func getFormatedDate(date: Date)->String{
@@ -45,9 +58,14 @@ struct BusListView: View {
         var reserveDone = false
         for bus in ckManager.buses{
             let busDepartureDuration = abs(Int(Date().timeIntervalSince(bus.startTime)))
+            if let reservedSeat = ckManager.isSeatReserved(employeeId: savedEmployeeID){
+                await ckManager.deallocateSeat(editedSeat: reservedSeat)
+                try? await ckManager.populateSeats(busId: bus.busId)
+            }
             if homeViewModel.durationInSecond < busDepartureDuration{
                 // allocate to empty seat
-                let isReserved = try? await ckManager.allocateSeat(busId: bus.busId, employeeId: savedEmployeeID)
+                let isReserved = try? await ckManager.allocateSeat(busId: bus.busId, employeeId: savedEmployeeID, distanceInMeter: homeViewModel.distanceInMeter)
+                try? await ckManager.populateSeats(busId: bus.busId)
                 if isReserved == true{
                     reserveDone = true
                     break
@@ -60,6 +78,7 @@ struct BusListView: View {
         if reserveDone == false{
             print("oops! no seat available on any bus")
         }
+        
     }
 }
 

@@ -275,13 +275,17 @@ class CloudKitManager: ObservableObject {
         }
     }
     
-    func bookSeat(editedSeat: SeatModel) async {
+    func bookSeat(editedSeat: SeatModel,employeeId:String) async {
         
 //        print("reserve test: bookSeat")
+        seatsDictionary[editedSeat.recordId!]?.isReserved = true
         seatsDictionary[editedSeat.recordId!]?.isFilled = true
+        seatsDictionary[editedSeat.recordId!]?.bookedBy = employeeId
         do {
             let record = try await db.record(for: editedSeat.recordId!)
+            record["isReserved"] = true
             record["isFilled"] = true
+            record["bookedBy"] = employeeId
             
             try await db.save(record)
         } catch {
@@ -301,16 +305,25 @@ class CloudKitManager: ObservableObject {
     }
     
     // reserve seat for
-    func allocateSeat(busId: String, employeeId:String) async -> Bool{
+    func allocateSeat(busId: String, employeeId:String, distanceInMeter:Int) async -> Bool{
         
 //        print("reserve test: allocateSeat")
-        if isSeatReserved(employeeId: employeeId) != nil{
-            return true
-        }
+//        if let reservedSeat = isSeatReserved(employeeId: employeeId){
+//            if distanceInMeter < zeroDistanceInMeter {
+//                await bookSeat(editedSeat: reservedSeat, employeeId: employeeId)
+//            }
+//            return true
+//        }
         let seatInBus = getSeatsByBusId(busId: busId)
         for seat in seatInBus{
             if seat.isReserved == false{
-                do{
+//                do{
+//                    await reserveSeat(editedSeat: seat, EmployeeId: employeeId)
+//                }
+                if distanceInMeter < zeroDistanceInMeter {
+                    await bookSeat(editedSeat: seat, employeeId: employeeId)
+                }
+                else{
                     await reserveSeat(editedSeat: seat, EmployeeId: employeeId)
                 }
                 return true
@@ -331,7 +344,7 @@ class CloudKitManager: ObservableObject {
             let record = try await db.record(for: editedSeat.recordId!)
             record["isReserved"] = false
             record["isFilled"] = false
-            record["bookedBy"] = false
+            record["bookedBy"] = ""
             
             try await db.save(record)
         } catch {

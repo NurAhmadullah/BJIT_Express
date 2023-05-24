@@ -29,6 +29,7 @@
 		89922E9E2A16163600653588 /* SeatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E9D2A16163600653588 /* SeatModel.swift */; };
 		89922EA02A1616DA00653588 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89922E9F2A1616DA00653588 /* CloudKitManager.swift */; };
 		89A5ACE92A1C6CDC0080B502 /* KeyValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A5ACE82A1C6CDC0080B502 /* KeyValueModel.swift */; };
+		89A5ACEB2A1DD3E90080B502 /* BusContant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A5ACEA2A1DD3E80080B502 /* BusContant.swift */; };
 		89ADF9262A0B9C810075DFC1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF9252A0B9C810075DFC1 /* OnboardingView.swift */; };
 		89ADF9282A0BA7470075DFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89ADF9272A0BA7470075DFC1 /* Assets.xcassets */; };
 		89ADF92A2A0BAE5D0075DFC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */; };
@@ -82,6 +83,7 @@
 		89922E9D2A16163600653588 /* SeatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatModel.swift; sourceTree = "<group>"; };
 		89922E9F2A1616DA00653588 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		89A5ACE82A1C6CDC0080B502 /* KeyValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueModel.swift; sourceTree = "<group>"; };
+		89A5ACEA2A1DD3E80080B502 /* BusContant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusContant.swift; sourceTree = "<group>"; };
 		89ADF9252A0B9C810075DFC1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		89ADF9272A0BA7470075DFC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89ADF9292A0BAE5D0075DFC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				89304E102A0A001600923508 /* BJIT Express MacPair.entitlements */,
 				89101CCF2A04C1E70064C993 /* BJIT_Express_MacPairApp.swift */,
 				89922E9F2A1616DA00653588 /* CloudKitManager.swift */,
+				89A5ACEA2A1DD3E80080B502 /* BusContant.swift */,
 				89F6AECC2A17986B0088D2C1 /* ViewModel */,
 				89922E982A1615FB00653588 /* Models */,
 				89032FBB2A1A1F28008434CD /* Views */,
@@ -362,6 +365,7 @@
 				89101CD92A04C1E80064C993 /* Persistence.swift in Sources */,
 				89ADF92F2A0CB34B0075DFC1 /* BusLayoutView.swift in Sources */,
 				89A5ACE92A1C6CDC0080B502 /* KeyValueModel.swift in Sources */,
+				89A5ACEB2A1DD3E90080B502 /* BusContant.swift in Sources */,
 				89ADF92D2A0BB2260075DFC1 /* LoginView.swift in Sources */,
 				89F6AECE2A1798810088D2C1 /* HomeViewModel.swift in Sources */,
 				89101CDC2A04C1E80064C993 /* BJIT_Express_MacPair.xcdatamodeld in Sources */,
